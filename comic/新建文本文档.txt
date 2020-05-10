@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>AYAComic | 导航条</title>
+
+    <!-- Bootstrap -->
+    <link href="../static/bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">AYAComic</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">首页</a></li>
+            <li><a href="#about">分类</a></li>
+            <li><a href="#contact">排行榜</a></li>
+            
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户名 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">我的收藏</a></li>
+                <li><a href="#">历史浏览</a></li>
+                <li><a href="#">我的投稿</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">个人主页</a></li>
+                <li><a href="#">退出</a></li>
+              </ul>
+            </li>
+
+          </ul>
+          <form class="nav navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="搜索">
+            </div>
+            <button type="submit" class="btn btn-default">搜索</button>
+          </form>
+          
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
+
+
+url("data:image/png;base64,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")
+
+310108199412102821
+310228199805261410
+<?xml version="1.0" encoding="utf-8"?>
+<XYXX>
+<ztlx>02</ztlx>
+<tydm></tydm>
+<username></username>
+<uname>uadmin</uname>
+<yysx>法律服务类政府采购活动</yysx>
+<ztmc>杨斌</ztmc>
+<password></password>
+</XYXX>
+
+
+<?xml version="1.0" encoding="utf-8"?><XYXX><ztlx>02</ztlx><tydm></tydm><username></username><uname>uadmin</uname><yysx>法律服务类政府采购活动</yysx><ztmc>杨斌</ztmc><password></password></XYXX>
+QIXy97lxxefEOkWzByA9Hg==
+
+
+财政补贴：包括“三无”、“五保”供养费，供养费分摊到床位费、护理费、膳食费，不包括在财政补贴中
+床位（托管）费
+护理费：包含养老服务补贴带入机构资金
+与本单位签订聘用合同人员仅限事业单位
+中专以上学历填写
+有无相关服务
+内设医疗机构职业证上的编号以委托协议上结束日期为准
+以委托协议上开始日期为准
+"国企：含央企、地方国企、部分村集体
+民企：含村办企业"
+
+
+
+
+
+含政府平衡性资金、补贴资金、补助资金
+
+
+
+
+
+
+
+
+接口反馈密文：<?xml version="1.0" encoding="UTF-8"?>
+<XYXX ztmc="" tydm="52310104MJ49962628" cxbh="JKCX202005061626501000901000016768"><RECORDS><RECORD RESOURCES="T_XYPT_FR_DJ_CTL" XXLB="登记类" RESOURCECODE="T_XYPT_FR_DJ_CTL" XXSSDWDM="D010047" XXSSDW="市社团局" RESOURCENAME="社会组织登记信息"><uniscid name="统一社会信用代码">52310104MJ49962628</uniscid><principalname name="法定代表人">柯维忠</principalname><regno name="工商注册号">0884</regno><organtype name="法人类型">民办非企业单位</organtype><approvedate name="成立日期">2018-03-14</approvedate><tradescope name="经营范围">为重度失能老年人、中度失能老年人、轻度失能老年人、自理老年人、提供集中居住、生活照料、康复护理、精神慰藉、文化娱乐等服务</tradescope><organcode name="组织机构代码">MJ4996262</organcode><address name="注册地址">上海市徐汇区丰谷路180弄101号</address><organname name="法人名称">上海市徐汇区龙华街道怡乐家园养护院</organname><regcapital name="注册资金(万)">100</regcapital><currencytype name="币种">人民币</currencytype><organstatus name="登记状态"/></RECORD><RECORD XXSSDW="市药品监督管理局" XXLB="资质类" RESOURCES="T_XYPT_FR_ZZ_CTL" RESOURCECODE="080051" XXSSDWDM="D010044" RESOURCENAME="食品经营许可"><qualilevel name="资质等级"/><licensecode name="证件号">JY33101040006349</licensecode><startdate name="证件有效期起">2018-04-02</startdate><licensestatus name="资质状态">无效</licensestatus><enddate name="证件有效期止">2023-04-01</enddate><validityarea name="有效区域"/><licensedate name="发证日期">2018-04-02</licensedate></RECORD></RECORDS><RESULTSTR>成功返回</RESULTSTR><RESULTCODE>1005</RESULTCODE><CXYS>125</CXYS></XYXX>
+接口反馈解密后数据：<?xml version="1.0" encoding="UTF-8"?>
+<XYXX ztmc="" tydm="52310104MJ49962628" cxbh="JKCX202005061626501000901000016768"><RECORDS><RECORD RESOURCES="T_XYPT_FR_DJ_CTL" XXLB="登记类" RESOURCECODE="T_XYPT_FR_DJ_CTL" XXSSDWDM="D010047" XXSSDW="市社团局" RESOURCENAME="社会组织登记信息"><uniscid name="统一社会信用代码">52310104MJ49962628</uniscid><principalname name="法定代表人">柯维忠</principalname><regno name="工商注册号">0884</regno><organtype name="法人类型">民办非企业单位</organtype><approvedate name="成立日期">2018-03-14</approvedate><tradescope name="经营范围">为重度失能老年人、中度失能老年人、轻度失能老年人、自理老年人、提供集中居住、生活照料、康复护理、精神慰藉、文化娱乐等服务</tradescope><organcode name="组织机构代码">MJ4996262</organcode><address name="注册地址">上海市徐汇区丰谷路180弄101号</address><organname name="法人名称">上海市徐汇区龙华街道怡乐家园养护院</organname><regcapital name="注册资金(万)">100</regcapital><currencytype name="币种">人民币</currencytype><organstatus name="登记状态"/></RECORD><RECORD XXSSDW="市药品监督管理局" XXLB="资质类" RESOURCES="T_XYPT_FR_ZZ_CTL" RESOURCECODE="080051" XXSSDWDM="D010044" RESOURCENAME="食品经营许可"><qualilevel name="资质等级"/><licensecode name="证件号">JY33101040006349</licensecode><startdate name="证件有效期起">2018-04-02</startdate><licensestatus name="资质状态">无效</licensestatus><enddate name="证件有效期止">2023-04-01</enddate><validityarea name="有效区域"/><licensedate name="发证日期">2018-04-02</licensedate></RECORD></RECORDS><RESULTSTR>成功返回</RESULTSTR><RESULTCODE>1005</RESULTCODE><CXYS>125</CXYS></XYXX>
+52310104MJ49962628{uniscid=52310104MJ49962628, principalname=柯维忠, regno=0884, resultDesc=成功返回, organtype=民办非企业单位, approvedate=2018-03-14, tradescope=为重度失能老年人、中度失能老年人、轻度失能老年人、自理老年人、提供集中居住、生活照料、康复护理、精神慰藉、文化娱乐等服务, organcode=MJ4996262, address=上海市徐汇区丰谷路180弄101号, resultCode=1005, organname=上海市徐汇区龙华街道怡乐家园养护院, regcapital=100, currencytype=人民币, organstatus=}
+
+接口反馈密文：<?xml version="1.0" encoding="UTF-8"?>
+<XYXX ztmc="朱永柏" tydm="320902199101221011" cxbh="JKCX202005061705131000902000099628"><RECORDS><RECORD XXSSDW="市公安局" XXLB="登记类" RESOURCES="GRZX080000001" XXSSDWDM="D010007" RESOURCENAME="个人基本信息"><ZJZLHZ name="证件种类汉字  ">身份证</ZJZLHZ><XBHZ name="性别汉字  ">男性</XBHZ><ZJHM name="证件号码  ">320902199101221011</ZJHM><XM name="姓名  ">朱永柏</XM><PHOTO name="照片">/9j/4AAQSkZJRgABAQEBXgFeAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcU
+FhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgo
+
+
+HTNLVeCeJwAj5+masVRAUUUUAIaCaDRTASig02gYtFJmigB4paSlpAFFFFAgooooARzhTXjnxc8W
+mwE1tZL5kqo2WZd+z1YD+EDONx7kd69J8VasmlafI55codoHPPbivlTX1k1ppbyZ/ItpHaW4u5XP
+
+cfrxXy4CJb6WRcnHUk1MxxNyxkOwH17VrQEnBNYFnnYgycg4rdt+uB0rhludkdi7BkyA44HStSN8
+JVGBcDNTbsVg0bIto9W7cFuAOtZsZyeKvx3aRABPmfHFQ43LUrGxZqikKxAPvWrEsRIwR6Vy8IuJ
+
+
+
+ab3pT0pjGsaVKbT1pAOpj9KkFRv3oAqN/ratL0qqf9cKtp0oBi0hpaKYCUhpe9JSAYw4rOA8u7Pb
+NabVnXH/AB8rSYzTXmP8KpHiarsX+qFU3/4+KBIs4opR0opgf//Z</PHOTO></RECORD><RECORD XXSSDW="市公安局" XXLB="资质类" RESOURCES="GRZX080000003" XXSSDWDM="D010007" RESOURCENAME="驾照居住证信息"><SFBLYXJZZ name="居住证信息">有</SFBLYXJZZ><SFBLYXJSZ name="机动车驾驶证">无</SFBLYXJSZ></RECORD><RECORD XXSSDW="市公积金中心" XXLB="登记类" RESOURCES="XY0700050207030001" XXSSDWDM="D070005" RESOURCENAME="公积金缴纳信息"><A4 name="账户所在单位名称">万达信息股份有限公司</A4><A3 name="当前账户状态">正常职工</A3><A5 name="开户日期">20150901</A5></RECORD></RECORDS><RESULTSTR>成功返回</RESULTSTR><RESULTCODE>1005</RESULTCODE><CXYS>891</CXYS></XYXX>
+接口反馈解密后数据：<?xml version="1.0" encoding="UTF-8"?>
+
+
+<XYXX ztmc="朱永柏" tydm="320902199101221011" cxbh="JKCX202005061705131000902000099628"><RECORDS><RECORD XXSSDW="市公安局" XXLB="登记类" RESOURCES="GRZX080000001" XXSSDWDM="D010007" RESOURCENAME="个人基本信息"><ZJZLHZ name="证件种类汉字  ">身份证</ZJZLHZ><XBHZ name="性别汉字  ">男性</XBHZ><ZJHM name="证件号码  ">320902199101221011</ZJHM><XM name="姓名  ">朱永柏</XM><PHOTO name="照片">/9j/4AAQSkZJRgABAQEBXgFeAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcU
+</PHOTO></RECORD><RECORD XXSSDW="市公安局" XXLB="资质类" RESOURCES="GRZX080000003" XXSSDWDM="D010007" RESOURCENAME="驾照居住证信息"><SFBLYXJZZ name="居住证信息">有</SFBLYXJZZ><SFBLYXJSZ name="机动车驾驶证">无</SFBLYXJSZ></RECORD><RECORD XXSSDW="市公积金中心" XXLB="登记类" RESOURCES="XY0700050207030001" XXSSDWDM="D070005" RESOURCENAME="公积金缴纳信息"><A4 name="账户所在单位名称">万达信息股份有限公司</A4><A3 name="当前账户状态">正常职工</A3><A5 name="开户日期">20150901</A5></RECORD></RECORDS><RESULTSTR>成功返回</RESULTSTR><RESULTCODE>1005</RESULTCODE><CXYS>891</CXYS></XYXX>
+null{uniscid=null, principalname=null, regno=null, resultDesc=成功返回, organtype=null, approvedate=null, tradescope=null, organcode=null, address=null, resultCode=1005, organname=null, regcapital=null, currencytype=null, organstatus=null}
+
+
+
+52310104MJ49962628
+310102193112034438
+310228199805261410
+kjhzyly
+document.getElementsByName('employeeName')[0].value="朱永柏"
+
+<XYXX ztmc="朱永柏" tydm="320902199101221011" cxbh="JKCX202005061715301000902000073737">
+<RECORDS>
+	<RECORD XXSSDW="市公安局" XXLB="登记类" RESOURCES="GRZX080000001" XXSSDWDM="D010007" RESOURCENAME="个人基本信息">
+		<ZJZLHZ name="证件种类汉字  ">身份证</ZJZLHZ>
+		<XBHZ name="性别汉字  ">男性</XBHZ>
+		<ZJHM name="证件号码  ">320902199101221011</ZJHM>
+		<XM name="姓名  ">朱永柏</XM>
+		<PHOTO name="照片"></PHOTO>
+	</RECORD>
+	<RECORD XXSSDW="市公安局" XXLB="资质类" RESOURCES="GRZX080000003" XXSSDWDM="D010007" RESOURCENAME="驾照居住证信息">
+		<SFBLYXJZZ name="居住证信息">有</SFBLYXJZZ>
+		<SFBLYXJSZ name="机动车驾驶证">无</SFBLYXJSZ>
+	</RECORD>
+	<RECORD XXSSDW="市公积金中心" XXLB="登记类" RESOURCES="XY0700050207030001" XXSSDWDM="D070005" RESOURCENAME="公积金缴纳信息">
+		<A4 name="账户所在单位名称">万达信息股份有限公司</A4>
+		<A3 name="当前账户状态">正常职工</A3>
+		<A5 name="开户日期">20150901</A5></RECORD>
+	</RECORDS>
+	<RESULTSTR>成功返回</RESULTSTR>
+	<RESULTCODE>1005</RESULTCODE>
+	<CXYS>188</CXYS>
+</XYXX>
+
+

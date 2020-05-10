@@ -1,0 +1,54 @@
+数据库
+用户
+id
+昵称（用户名）
+密码
+姓名
+性别
+身份证
+生日
+手机号
+账号启用状态
+是否管理员
+创建时间
+
+漫画
+id
+书籍名称
+作者名称
+出版社/汉化组名称
+类别
+地区
+进度
+创建时间
+
+
+漫画具体内容
+id
+漫画id（外键 漫画）
+话数（第一话 第二话 也可自定义名称？）
+具体内容（链接七牛云图床？）
+
+
+漫画上传信息表
+id
+漫画id（外键 漫画）
+上传者id （外键 用户）
+
+类别
+id
+类别名称
+
+地区
+id
+地区名称
+
+进度
+id
+进度名称
+
+
+
+近年来随着科技的日新月异，人们的生活水平也在逐渐提高。人们拥有了更多的获取信息的方式以及获取信息的速度。而其中“二次元”作为一种新型的网络文化在网络当中传播开来，影响了国内的大部分年轻群体，深受年轻人的喜爱。“二次元文化”泛指动画(Anime)、漫画(Comic)、游戏(Game)、轻小说(Novel)内容及相关衍生品。互联网的发展扩大了二次元文化覆盖面和传播广度，更多非核心层次二次元人群有机会接触、了解二次元内容及文化，泛二次元群体不断扩大。而这当中漫画这块还是块未被充分挖掘的沃土。当代年轻人缺少一个漫画资源齐全，使用体验良好，价格亲民的漫画阅读平台。同时国内各漫画创作者们也缺少一个可以供他们分享自己漫画，实现自身梦想的漫画创作平台。因此，本次课题为发扬互联网共享精神，打算设计一个为广大青少年二次元文化爱好者以及创作者服务的漫画在线阅读分享平台。普通用户可以在上边查阅自己喜欢的漫画，对于自己喜欢的漫画可以点赞、收藏、分享给其他人。创作者也可以分享自己所绘制的漫画供别人观赏。
+
+In recent years, with the rapid development of science and technology, people's living standards are gradually improving. People have more ways to get information and the speed of getting information. As a new type of network culture, the "second dimension" has spread in the network, affecting most of the young groups in China, and is deeply loved by young people. "Dual culture" generally refers to animation, comic, game, Novell content and related derivatives. The development of the Internet has expanded the coverage and spread of the second-dimensional culture. More non core level second-dimensional people have the opportunity to contact and understand the second-dimensional content and culture, and the pan second-dimensional group is expanding. Among them, the cartoon is still a fertile land that has not been fully excavated. Contemporary young people lack a cartoon reading platform with complete resources, good experience and people-friendly price. At the same time, the domestic comics creators also lack a platform for them to share their own comics and realize their dreams. Therefore, in order to carry forward the spirit of Internet sharing, this project intends to design a cartoon online reading and sharing platform for the majority of youth secondary culture lovers and creators. Ordinary users can look up their favorite comics on the top, like, collect and share them with others. Creators can also share their own comics for others to watch.
