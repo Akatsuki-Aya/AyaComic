@@ -50,4 +50,6 @@ public class LoginController {
 
     @RequestMapping("/toRegist")
     public String toRegist(){ return "/userPage/regist"; }
+    @RequestMapping("/toUploadImgFile")
+    public String toUploadImgFile(){return "/userManage/comicUploadManage";}
 }
