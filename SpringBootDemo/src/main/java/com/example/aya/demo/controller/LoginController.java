@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 /**
  * @author aya
  */
@@ -20,11 +23,16 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private HttpServletRequest request;
 
     @RequestMapping("/login")
     public String login(Model model,String username, String password) {
         if (userService.login(username,password)) {
-            return "success";
+            HttpSession session = request.getSession();
+            User user = userService.findUserByUserName(username);
+            session.setAttribute("userId",user.getId());
+            return "redirect:/upload/toUploadImgFile";
         } else {
             model.addAttribute("msgErrorFlag", false);
             model.addAttribute("errorMsg", "用户名或密码出错");

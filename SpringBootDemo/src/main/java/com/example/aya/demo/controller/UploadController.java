@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -28,7 +29,7 @@ public class UploadController {
 
 
     @RequestMapping("/toUploadImgFile")
-    public String toUploadImgFile(){return "/userManage/textUpload";}
+    public String toUploadImgFile(){return "/userManage/comicUpload";}
 
     @ResponseBody
     @RequestMapping(value = "/upFile",method= RequestMethod.POST)
@@ -43,6 +44,19 @@ public class UploadController {
         JSONObject result = new JSONObject();
         result.put("msg","success");
         result.put("fileUrl",fileUrl);
+        return result.toJSONString();
+    }
+    @ResponseBody
+    @RequestMapping(value = "/test",method= RequestMethod.POST)
+    public String test(){
+        HttpSession session = request.getSession();
+        Object userId = session.getAttribute("userId");
+        System.out.println((Long) userId);
+        String msg = request.getParameter("msg");
+        System.out.println(msg);
+        JSONObject result = new JSONObject();
+        result.put("msg","success");
+        result.put("data","ajaxReturn");
         return result.toJSONString();
     }
 }

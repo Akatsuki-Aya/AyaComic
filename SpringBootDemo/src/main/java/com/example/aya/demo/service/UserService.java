@@ -31,4 +31,11 @@ public interface UserService {
      * @return
      */
     Boolean login(String userName,String password);
+
+    /**
+     * 查找用户通过用户名
+     * @param userName
+     * @return
+     */
+    User findUserByUserName(String userName);
 }
