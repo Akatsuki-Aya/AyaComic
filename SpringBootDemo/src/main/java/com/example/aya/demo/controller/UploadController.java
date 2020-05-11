@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,17 +55,21 @@ public class UploadController {
 
     @ResponseBody
     @RequestMapping(value = "/upFile",method= RequestMethod.POST)
-    public String upFile(@RequestParam("file_data") MultipartFile[] file)throws Exception{
+    public String upFile(@RequestParam("file_data") MultipartFile[] files)throws Exception{
+        if (files!=null && files.length>0){}
+        else {
+            return "";
+        }
         String fileId = request.getParameter("fileId");
-        int i = file.length;
-
-        byte[] bytes = file[0].getBytes();
-        String fileUrl = QiNiuUtil.upload(bytes);
-
-        System.out.println(fileUrl);
+        List<String> urls = new ArrayList<>();
+        for (MultipartFile file:files) {
+            byte[] bytes = file.getBytes();
+            //String fileUrl = QiNiuUtil.upload(bytes);
+            urls.add("sss");
+        }
         JSONObject result = new JSONObject();
         result.put("msg","success");
-        result.put("fileUrl",fileUrl);
+        result.put("fileUrls",JSONObject.toJSONString(urls));
         return result.toJSONString();
     }
     @ResponseBody
