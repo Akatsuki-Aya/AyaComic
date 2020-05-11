@@ -145,11 +145,7 @@
                         <label for="inputAddress" class="col-sm-2 control-label">地区</label>
                         <div class="col-sm-10">
                           <select class="form-control" id="inputAddress">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                              <option th:each="address:${addressList}" th:text="${address.addressName}"></option>
                           </select>
                         </div>
                     </div>
@@ -157,11 +153,7 @@
                         <label for="inputComplete" class="col-sm-2 control-label">进度</label>
                         <div class="col-sm-10">
                           <select class="form-control" id="inputComplete">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                              <option th:each="progress:${progressesList}" th:text="${progress.progressName}"></option>
                           </select>
                         </div>
                     </div>

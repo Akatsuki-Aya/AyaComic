@@ -1,8 +1,12 @@
 package com.example.aya.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.aya.demo.dao.Address;
 import com.example.aya.demo.dao.Classfiy;
+import com.example.aya.demo.dao.Progress;
+import com.example.aya.demo.service.AddressService;
 import com.example.aya.demo.service.ClassfiyService;
+import com.example.aya.demo.service.ProgressService;
 import com.example.aya.demo.util.QiNiuUtil;
 import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +36,15 @@ public class UploadController {
     private HttpServletRequest request;
     @Autowired
     private ClassfiyService classfiyService;
+    @Autowired
+    private AddressService addressService;
+    @Autowired
+    private ProgressService progressService;
 
 
     @RequestMapping("/toUploadImgFile")
     public String toUploadImgFile(Model model){
-        List<Classfiy> classfiyList = classfiyService.findAll();
-        model.addAttribute("classfiyList",classfiyList);
+        this.getAllClassifyAddressProgress(model);
         return "/userManage/comicUpload";
     }
 
@@ -68,5 +75,14 @@ public class UploadController {
         result.put("msg","success");
         result.put("data","ajaxReturn");
         return result.toJSONString();
+    }
+
+    public void getAllClassifyAddressProgress(Model model){
+        List<Classfiy> classfiyList = classfiyService.findAll();
+        List<Address> addressList = addressService.findAll();
+        List<Progress> progressesList = progressService.findAll();
+        model.addAttribute("classfiyList",classfiyList);
+        model.addAttribute("addressList",addressList);
+        model.addAttribute("progressesList",progressesList);
     }
 }
