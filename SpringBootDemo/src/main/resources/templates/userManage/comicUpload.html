@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -136,12 +136,8 @@
                     <div class="form-group">
                         <label for="inputClass" class="col-sm-2 control-label">类别</label>
                         <div class="col-sm-10">
-                          <select class="form-control" id="inputClass">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                          <select class="form-control" id="inputClass" >
+                            <option th:each="classfiy:${classfiyList}" th:text="${classfiy.classfiyName}"></option>
                           </select>
                         </div>
                     </div>

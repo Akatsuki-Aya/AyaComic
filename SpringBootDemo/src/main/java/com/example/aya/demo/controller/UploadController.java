@@ -1,10 +1,13 @@
 package com.example.aya.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.aya.demo.dao.Classfiy;
+import com.example.aya.demo.service.ClassfiyService;
 import com.example.aya.demo.util.QiNiuUtil;
 import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 /**
  * @author Aya
@@ -26,10 +30,16 @@ import java.io.OutputStream;
 public class UploadController {
     @Autowired
     private HttpServletRequest request;
+    @Autowired
+    private ClassfiyService classfiyService;
 
 
     @RequestMapping("/toUploadImgFile")
-    public String toUploadImgFile(){return "/userManage/comicUpload";}
+    public String toUploadImgFile(Model model){
+        List<Classfiy> classfiyList = classfiyService.findAll();
+        model.addAttribute("classfiyList",classfiyList);
+        return "/userManage/comicUpload";
+    }
 
     @ResponseBody
     @RequestMapping(value = "/upFile",method= RequestMethod.POST)

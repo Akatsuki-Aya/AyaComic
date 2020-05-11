@@ -11,7 +11,6 @@ import java.util.Date;
 /**
  * @author Aya
  */
-@SuppressWarnings("ALL")
 @Entity
 @Table
 public class User implements Serializable {
