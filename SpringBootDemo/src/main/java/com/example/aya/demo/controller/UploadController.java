@@ -8,6 +8,7 @@ import com.example.aya.demo.service.AddressService;
 import com.example.aya.demo.service.ClassfiyService;
 import com.example.aya.demo.service.ProgressService;
 import com.example.aya.demo.util.QiNiuUtil;
+import com.google.gson.JsonObject;
 import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,6 +45,9 @@ public class UploadController {
 
     @RequestMapping("/toUploadImgFile")
     public String toUploadImgFile(Model model){
+        if (!checkIsLogin()){
+            return "redirect:/user/toLogin";
+        }
         this.getAllClassifyAddressProgress(model);
         return "/userManage/comicUpload";
     }
@@ -84,5 +88,15 @@ public class UploadController {
         model.addAttribute("classfiyList",classfiyList);
         model.addAttribute("addressList",addressList);
         model.addAttribute("progressesList",progressesList);
+    }
+
+    public boolean checkIsLogin(){
+        HttpSession session = request.getSession();
+        Object userId = session.getAttribute("userId");
+        Long id = (Long) userId;
+        if(id!=null){
+            return true;
+        }
+        return false;
     }
 }
