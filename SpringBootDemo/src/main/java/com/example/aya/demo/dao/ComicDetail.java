@@ -14,7 +14,7 @@ public class ComicDetail implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "comic_id")
-    private String comicId;
+    private Long comicId;
     @Column
     private String name;
     @Column
@@ -38,11 +38,11 @@ public class ComicDetail implements Serializable {
         this.id = id;
     }
 
-    public String getComicId() {
+    public Long getComicId() {
         return comicId;
     }
 
-    public void setComicId(String comicId) {
+    public void setComicId(Long comicId) {
         this.comicId = comicId;
     }
 

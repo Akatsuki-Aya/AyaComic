@@ -6,5 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * @author Aya
  */
-public interface ComicDetailImpl extends JpaRepository<ComicDetail,Long> {
+public interface ComicDetailImpl extends JpaRepository<ComicDetail, Long> {
+
+    @Override
+    ComicDetail save(ComicDetail comicDetail);
 }

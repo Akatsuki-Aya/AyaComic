@@ -128,4 +128,21 @@ public class Comic implements Serializable {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override
+    public String toString() {
+        return "Comic{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", titleImgUrl='" + titleImgUrl + '\'' +
+                ", author='" + author + '\'' +
+                ", publishingHouse='" + publishingHouse + '\'' +
+                ", classfiy='" + classfiy + '\'' +
+                ", address='" + address + '\'' +
+                ", progress='" + progress + '\'' +
+                ", description='" + description + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

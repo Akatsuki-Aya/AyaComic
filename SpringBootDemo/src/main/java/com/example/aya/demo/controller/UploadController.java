@@ -1,13 +1,9 @@
 package com.example.aya.demo.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.example.aya.demo.dao.Address;
-import com.example.aya.demo.dao.Classfiy;
-import com.example.aya.demo.dao.Comic;
-import com.example.aya.demo.dao.Progress;
-import com.example.aya.demo.service.AddressService;
-import com.example.aya.demo.service.ClassfiyService;
-import com.example.aya.demo.service.ProgressService;
+import com.example.aya.demo.dao.*;
+import com.example.aya.demo.service.*;
 import com.example.aya.demo.util.QiNiuUtil;
 import com.google.gson.JsonObject;
 import org.apache.catalina.connector.Request;
@@ -27,6 +23,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,6 +40,12 @@ public class UploadController {
     private AddressService addressService;
     @Autowired
     private ProgressService progressService;
+    @Autowired
+    private ComicService comicService;
+    @Autowired
+    private ComicDetailService comicDetailService;
+    @Autowired
+    private UpComicService upComicService;
 
 
     @RequestMapping("/toUploadImgFile")
@@ -65,21 +68,42 @@ public class UploadController {
         List<String> urls = new ArrayList<>();
         for (MultipartFile file:files) {
             byte[] bytes = file.getBytes();
-            //String fileUrl = QiNiuUtil.upload(bytes);
-            urls.add("sss");
+            String fileUrl = QiNiuUtil.upload(bytes);
+            urls.add(fileUrl);
         }
         JSONObject result = new JSONObject();
         result.put("msg","success");
         result.put("fileUrls",JSONObject.toJSONString(urls));
         return result.toJSONString();
     }
+
     @ResponseBody
-    @RequestMapping(value = "/test",method= RequestMethod.POST)
-    public String test(Comic comic){
-        System.out.println(JSONObject.toJSONString(comic));
+    @RequestMapping(value = "/addComic", method = RequestMethod.POST)
+    public String addComic(Comic comic, String comicJson) {
+        //漫画添加
+        comic.setCreateTime(new Date());
+        comic.setUpdateTime(new Date());
+        Comic savedComic = comicService.saveComic(comic);
+        System.out.println(savedComic.getId());
+        //漫画详细添加
+        JSONArray comicJsonList = JSONObject.parseArray(comicJson);
+        List<ComicDetail> listComicDetail = new ArrayList<>();
+        for (int i = 0; i < comicJsonList.size(); i++) {
+            ComicDetail comicDetail = comicJsonList.getObject(i, ComicDetail.class);
+            comicDetail.setComicId(savedComic.getId());
+            comicDetail.setCreateTime(new Date());
+            comicDetailService.saveComicDetail(comicDetail);
+        }
+        //up漫画联系添加
+        HttpSession session = request.getSession();
+        Long userId = (Long)session.getAttribute("userId");
+        Long comicId = savedComic.getId();
+        UpComic upComic = new UpComic(userId,comicId);
+        upComicService.saveUpComicService(upComic);
+
         JSONObject result = new JSONObject();
-        result.put("msg","success");
-        result.put("data","ajaxReturn");
+        result.put("msg", "上传成功");
+        result.put("data", "ajaxReturn");
         return result.toJSONString();
     }
 

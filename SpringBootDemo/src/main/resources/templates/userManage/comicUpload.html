@@ -340,10 +340,21 @@
     function  save() {
         var data = $("form").serialize();
         var liList = $(".comic-num-list").children();
+        var comicList =[];
+        for(var i=0; i<liList.length-1; i++){
+            var text = $(liList[i]).text();
+            var urls = $(liList[i]).attr("uped_urls");
+            if(urls!=null && urls !=""){
+                var list ={name:text,urls:urls};
+                comicList.push(list);
+            }
 
-        /*$.ajax({
+        }
+        var comicJson = JSON.stringify(comicList);
+        data=data+"&comicJson="+comicJson;
+        $.ajax({
             type:"POST",
-            url:"test",
+            url:"addComic",
             // data:{"id":val},     // data参数是可选的，有多种写法，也可以直接在url参数拼接参数上去，例如这样：url:"getUser?id="+val,
             data:data,
             async:true,   // 异步，默认开启，也就是$.ajax后面的代码是不是跟$.ajx里面的代码一起执行
@@ -354,7 +365,7 @@
             error:function() {
                 alert("error");
             }
-        });*/
+        });
 
     }
     

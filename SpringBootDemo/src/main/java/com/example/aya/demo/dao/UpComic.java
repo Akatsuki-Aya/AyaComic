@@ -16,6 +16,10 @@ public class UpComic implements Serializable {
 
     public UpComic() {
     }
+    public UpComic(Long userId,Long comicId){
+        this.userId = userId;
+        this.comicId = comicId;
+    }
 
 
     public Long getId() {

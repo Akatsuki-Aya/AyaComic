@@ -1,7 +1,9 @@
 package com.example.aya.demo;
 
 
+import com.example.aya.demo.dao.Comic;
 import com.example.aya.demo.dao.User;
+import com.example.aya.demo.dao.impl.ComicImpl;
 import com.example.aya.demo.dao.impl.UserImpl;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,11 +20,16 @@ import java.util.Date;
 public class UserImplTest {
     @Autowired
     private UserImpl userImpl;
+    @Autowired
+    private ComicImpl comicImpl;
     @Test
     public void test() throws Exception{
-        Date date = new Date();
-        DateFormat dateFormat =DateFormat.getDateTimeInstance(DateFormat.LONG,DateFormat.LONG);
-        String formattedDate = dateFormat.format(date);
+        Comic comic = new Comic();
+        comic.setTitle("aaa");
+        comic.setCreateTime(new Date());
+        Comic save = comicImpl.save(comic);
+        System.out.println( save);
+
 
         /*userImpl.save(new User("aa1", "aa@126.com", "aa", "aa123456",formattedDate));
         userImpl.save(new User("bb2", "bb@126.com", "bb", "bb123456",formattedDate));
