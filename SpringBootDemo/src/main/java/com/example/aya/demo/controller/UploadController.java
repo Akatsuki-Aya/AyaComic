@@ -90,7 +90,7 @@ public class UploadController {
         List<ComicDetail> listComicDetail = new ArrayList<>();
         for (int i = 0; i < comicJsonList.size(); i++) {
             ComicDetail comicDetail = comicJsonList.getObject(i, ComicDetail.class);
-            comicDetail.setComicId(savedComic.getId());
+            comicDetail.setComicId(savedComic);
             comicDetail.setCreateTime(new Date());
             comicDetailService.saveComicDetail(comicDetail);
         }

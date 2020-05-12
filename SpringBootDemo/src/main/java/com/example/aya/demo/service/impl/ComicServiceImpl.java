@@ -6,6 +6,8 @@ import com.example.aya.demo.service.ComicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * @author Aya
  */
@@ -17,5 +19,11 @@ public class ComicServiceImpl implements ComicService {
     @Override
     public Comic saveComic(Comic comic) {
         return comicImpl.save(comic);
+    }
+
+    @Override
+    public Comic findComicById(Long id){
+        Optional<Comic> comic = comicImpl.findById(id);
+        return comic.isPresent()?comic.get():null;
     }
 }

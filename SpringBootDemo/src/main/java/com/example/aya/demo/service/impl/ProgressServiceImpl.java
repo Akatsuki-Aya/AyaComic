@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Aya
@@ -26,5 +27,12 @@ public class ProgressServiceImpl implements ProgressService {
         orderList.add(order);
         Sort sort = Sort.by(orderList);
         return progressImpl.findAll(sort);
+    }
+
+    @Override
+    public String findByIdReturnName(Long id){
+        Optional<Progress> result = progressImpl.findById(id);
+        Progress progress = result.isPresent()? result.get():null;
+        return progress.getProgressName();
     }
 }

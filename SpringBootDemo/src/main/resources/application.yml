@@ -3,4 +3,4 @@ server:
 
 spring:
   resources:
-    static-locations: classpath:/templates/,classpath:/userPage,classpath:/userManage,classpath:static/
+    static-locations: classpath:/templates/,classpath:/userPage,classpath:/userManage,classpath:/comicMainPage,classpath:static/

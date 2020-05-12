@@ -13,4 +13,11 @@ public interface ProgressService {
      * @return
      */
     List<Progress> findAll();
+
+    /**
+     * 根据id查询返回进度名
+     * @param id
+     * @return
+     */
+    public String findByIdReturnName(Long id);
 }

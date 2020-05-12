@@ -12,4 +12,5 @@ public interface ComicService {
      * @return
      */
     Comic saveComic(Comic comic);
+    Comic findComicById(Long id);
 }

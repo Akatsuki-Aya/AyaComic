@@ -5,6 +5,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Aya
@@ -24,4 +25,7 @@ public interface ProgressImpl extends JpaRepository<Progress, Long> {
      */
     @Override
     List<Progress> findAll(Sort sort);
+
+    @Override
+    Optional<Progress> findById(Long id);
 }

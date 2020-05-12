@@ -13,8 +13,10 @@ public class ComicDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "comic_id")
-    private Long comicId;
+
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
+    @JoinColumn(name = "comic_id")
+    private Comic comicId;
     @Column
     private String name;
     @Column
@@ -38,11 +40,11 @@ public class ComicDetail implements Serializable {
         this.id = id;
     }
 
-    public Long getComicId() {
+    public Comic getComicId() {
         return comicId;
     }
 
-    public void setComicId(Long comicId) {
+    public void setComicId(Comic comicId) {
         this.comicId = comicId;
     }
 

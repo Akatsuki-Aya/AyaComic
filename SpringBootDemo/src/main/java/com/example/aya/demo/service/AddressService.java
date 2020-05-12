@@ -13,4 +13,6 @@ public interface AddressService {
      * @return
      */
     List<Address> findAll();
+
+    String findByIdReturnName(Long id);
 }

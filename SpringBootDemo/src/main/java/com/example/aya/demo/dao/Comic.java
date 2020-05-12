@@ -3,6 +3,7 @@ package com.example.aya.demo.dao;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Aya
@@ -33,6 +34,16 @@ public class Comic implements Serializable {
     private Date createTime;
     @Column(name = "update_time")
     private Date updateTime;
+    @OneToMany(mappedBy = "comicId",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    private List<ComicDetail> comicDetailList;
+
+    public List<ComicDetail> getComicDetailList() {
+        return comicDetailList;
+    }
+
+    public void setComicDetailList(List<ComicDetail> comicDetailList) {
+        this.comicDetailList = comicDetailList;
+    }
 
     public Comic() {
     }
@@ -143,6 +154,7 @@ public class Comic implements Serializable {
                 ", description='" + description + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", comicDetailList=" + comicDetailList +
                 '}';
     }
 }

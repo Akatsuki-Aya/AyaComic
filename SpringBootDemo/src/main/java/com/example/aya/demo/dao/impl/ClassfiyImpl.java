@@ -1,7 +1,6 @@
 package com.example.aya.demo.dao.impl;
 
 import com.example.aya.demo.dao.Classfiy;
-import com.example.aya.demo.dao.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -17,6 +16,9 @@ public interface ClassfiyImpl extends JpaRepository<Classfiy,Long> {
      */
     @Override
     List<Classfiy> findAll();
+
+    @Override
+    Optional<Classfiy> findById(Long id);
 
 
 }

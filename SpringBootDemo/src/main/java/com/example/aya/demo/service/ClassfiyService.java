@@ -12,4 +12,6 @@ public interface ClassfiyService {
 
     List<Classfiy> findAll();
 
+    String findByIdReturnName(Long id);
+
 }
