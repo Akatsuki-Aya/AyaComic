@@ -116,49 +116,49 @@
                     <div class="form-group">
                       <label for="inputTitle" class="col-sm-2 control-label">标题</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputTitle" placeholder="标题">
+                        <input type="text" class="form-control" id="inputTitle" name="title" placeholder="标题">
                       </div>
                     </div>
                     <div class="form-group">
                         <label for="inputAuthor" class="col-sm-2 control-label">作者</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputAuthor" placeholder="作者">
+                          <input type="text" class="form-control" id="inputAuthor" name="author" placeholder="作者">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputPublish" class="col-sm-2 control-label">出版社</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputPublish" placeholder="出版社或者汉化组">
+                          <input type="text" class="form-control" id="inputPublish" name="publishingHouse" placeholder="出版社或者汉化组">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputClass" class="col-sm-2 control-label">类别</label>
                         <div class="col-sm-10">
-                          <select class="form-control" id="inputClass" >
-                            <option th:each="classfiy:${classfiyList}" th:text="${classfiy.classfiyName}"></option>
+                          <select class="form-control" id="inputClass" name="classfiy" >
+                            <option th:each="classfiy:${classfiyList}" th:text="${classfiy.classfiyName}" th:value="${classfiy.id}"></option>
                           </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputAddress" class="col-sm-2 control-label">地区</label>
                         <div class="col-sm-10">
-                          <select class="form-control" id="inputAddress">
-                              <option th:each="address:${addressList}" th:text="${address.addressName}"></option>
+                          <select class="form-control" id="inputAddress" name="address">
+                              <option th:each="address:${addressList}" th:text="${address.addressName}" th:value="${address.id}"></option>
                           </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputComplete" class="col-sm-2 control-label">进度</label>
                         <div class="col-sm-10">
-                          <select class="form-control" id="inputComplete">
-                              <option th:each="progress:${progressesList}" th:text="${progress.progressName}"></option>
+                          <select class="form-control" id="inputComplete" name="progress">
+                              <option th:each="progress:${progressesList}" th:text="${progress.progressName}" th:value="${progress.id}"></option>
                           </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputDesc" class="col-sm-2 control-label">简介</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="inputDesc" rows="3"></textarea>
+                            <textarea class="form-control" id="inputDesc" name="description" rows="3"></textarea>
                         </div>
                     </div>
                     <div style="text-align: right;">
@@ -284,7 +284,9 @@
 
         //初始化fileinput
     //initFileInput(name);
-    function initFileInput(name) {        
+    function initFileInput(name) {
+        var id= name.substring(11);
+        var id="upload-"+id;
         $("#"+name).fileinput({
             theme: 'fas',
             language: 'zh', //设置语言
@@ -326,18 +328,24 @@
             mydata = data;
         }).on('filebatchuploadsuccess',function (event,data,files,extra) {      //同步上传完成
             //alert(data.response.prototype);
-            $("#"+name).arrt("uped_urls",data.response.fileUrls);
-            mydata = data;
+            console.log(id);
+            var myLi = $("#"+id);
+            //alert(data.response.fileUrls);
+            myLi.attr("uped_urls",data.response.fileUrls);
+            mydata = $("#"+id);
         });
     }
 
     
     function  save() {
-        $.ajax({
+        var data = $("form").serialize();
+        var liList = $(".comic-num-list").children();
+
+        /*$.ajax({
             type:"POST",
             url:"test",
             // data:{"id":val},     // data参数是可选的，有多种写法，也可以直接在url参数拼接参数上去，例如这样：url:"getUser?id="+val,
-            data:{"msg":"helloWorld"},
+            data:data,
             async:true,   // 异步，默认开启，也就是$.ajax后面的代码是不是跟$.ajx里面的代码一起执行
             dataType:"json",   // 返回浏览器的数据类型，指定是json格式，前端这里才可以解析json数据
             success:function(data){
@@ -346,7 +354,7 @@
             error:function() {
                 alert("error");
             }
-        });
+        });*/
 
     }
     

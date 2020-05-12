@@ -19,6 +19,8 @@ public class Comic implements Serializable {
     private String titleImgUrl;
     @Column
     private String author;
+    @Column(name = "publishing_house")
+    private String publishingHouse;
     @Column
     private String classfiy;
     @Column
@@ -33,6 +35,22 @@ public class Comic implements Serializable {
     private Date updateTime;
 
     public Comic() {
+    }
+
+    public String getPublishingHouse() {
+        return publishingHouse;
+    }
+
+    public void setPublishingHouse(String publishingHouse) {
+        this.publishingHouse = publishingHouse;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Comic(String description) {

@@ -3,6 +3,7 @@ package com.example.aya.demo.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.example.aya.demo.dao.Address;
 import com.example.aya.demo.dao.Classfiy;
+import com.example.aya.demo.dao.Comic;
 import com.example.aya.demo.dao.Progress;
 import com.example.aya.demo.service.AddressService;
 import com.example.aya.demo.service.ClassfiyService;
@@ -74,12 +75,8 @@ public class UploadController {
     }
     @ResponseBody
     @RequestMapping(value = "/test",method= RequestMethod.POST)
-    public String test(){
-        HttpSession session = request.getSession();
-        Object userId = session.getAttribute("userId");
-        System.out.println((Long) userId);
-        String msg = request.getParameter("msg");
-        System.out.println(msg);
+    public String test(Comic comic){
+        System.out.println(JSONObject.toJSONString(comic));
         JSONObject result = new JSONObject();
         result.put("msg","success");
         result.put("data","ajaxReturn");
