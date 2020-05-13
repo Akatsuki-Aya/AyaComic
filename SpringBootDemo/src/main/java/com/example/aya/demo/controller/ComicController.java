@@ -64,6 +64,14 @@ public class ComicController {
 
         return "/comicMainPage/comicShow";
     }
+    @RequestMapping("/toClassfiy")
+    public String toClassfiy(Model model){
+        if (!checkIsLogin()){
+            return "redirect:/user/toLogin";
+        }
+
+        return "/comicMainPage/classify";
+    }
 
     @RequestMapping("/addComicCollect")
     @ResponseBody

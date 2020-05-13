@@ -1,5 +1,5 @@
 document.writeln("<nav class=\'navbar navbar-default navbar-fixed-top\'>");
-document.writeln("      <div class=\'container\'>");
+document.writeln("      <div class=\'container mynavbar\'>");
 document.writeln("        <div class=\'navbar-header\'>");
 document.writeln("          <button type=\'button\' class=\'navbar-toggle collapsed\' data-toggle=\'collapse\' data-target=\'#navbar\' aria-expanded=\'false\' aria-controls=\'navbar\'>");
 document.writeln("            <span class=\'sr-only\'>Toggle navigation</span>");

@@ -56,6 +56,14 @@ public class UploadController {
         this.getAllClassifyAddressProgress(model);
         return "/userManage/comicUpload";
     }
+    @RequestMapping("/toUploadManage")
+    public String toUploadManage(Model model){
+        if (!checkIsLogin()){
+            return "redirect:/user/toLogin";
+        }
+
+        return "/userManage/comicUploadManage";
+    }
 
     @ResponseBody
     @RequestMapping(value = "/upFile",method= RequestMethod.POST)
