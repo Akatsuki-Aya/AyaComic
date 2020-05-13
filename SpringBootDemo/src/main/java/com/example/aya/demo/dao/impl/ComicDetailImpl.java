@@ -1,5 +1,6 @@
 package com.example.aya.demo.dao.impl;
 
+import com.example.aya.demo.dao.Comic;
 import com.example.aya.demo.dao.ComicDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,5 +11,5 @@ public interface ComicDetailImpl extends JpaRepository<ComicDetail, Long> {
 
     @Override
     ComicDetail save(ComicDetail comicDetail);
-    ComicDetail findByIdAndComicId(Long id,Long comicId);
+    ComicDetail findByIdAndComicId(Long id, Comic comicId);
 }

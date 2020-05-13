@@ -117,7 +117,7 @@
                  </p>
                 </div>
                 <div class="comic-button">
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=".show-comic" style="width: 200px;" onclick="changeComic(); " th:attr="historyId=${comicDetailId}" id="startComic">开始阅读</button>
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=".show-comic" style="width: 200px;" onclick="changeComic(); " th:attr="historyId=${comicHistory.comicDetailId}" id="startComic">开始阅读</button>
                     <button type="button" class="btn btn-default btn-lg"  onclick="changeCollect();" style="width: 144px;"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span><span class="isCollect" th:if="${comicCollect} == null">收藏</span><span th:if="${comicCollect} != null" class="isCollect">已收藏</span></button>
                 </div>
             </div>
@@ -185,6 +185,7 @@
           function showComic(value) {
               var id= $(value).attr("id").substr(14);
               $("#startComic").attr("historyId",id);
+              updateHistory(id);
               changeComic();
           }
           function changeCollect() {
@@ -199,6 +200,24 @@
                   success:function(data){
                       mydata=data;
                       $(".isCollect").text(data.isCollect);
+                      //alert("上传成功");
+                  },
+                  error:function() {
+                      alert("error");
+                  }
+              });
+          }
+          function updateHistory(comicDetailid) {
+              var comicId = $(".comic-title").attr("comicId");
+              $.ajax({
+                  type:"POST",
+                  url:"updateHistory",
+                  // data:{"id":val},     // data参数是可选的，有多种写法，也可以直接在url参数拼接参数上去，例如这样：url:"getUser?id="+val,
+                  data:{comicId:comicId,comicDetailId:comicDetailid},
+                  async:true,   // 异步，默认开启，也就是$.ajax后面的代码是不是跟$.ajx里面的代码一起执行
+                  dataType:"json",   // 返回浏览器的数据类型，指定是json格式，前端这里才可以解析json数据
+                  success:function(data){
+                      mydata = data;
                       //alert("上传成功");
                   },
                   error:function() {

@@ -1,5 +1,6 @@
 package com.example.aya.demo.service.impl;
 
+import com.example.aya.demo.dao.Comic;
 import com.example.aya.demo.dao.ComicDetail;
 import com.example.aya.demo.dao.impl.ComicDetailImpl;
 import com.example.aya.demo.service.ComicDetailService;
@@ -22,7 +23,7 @@ public class ComicDetailServiceImpl implements ComicDetailService {
     }
 
     @Override
-    public ComicDetail findComicDetailByIdAndComicId(Long id,Long comicId) {
+    public ComicDetail findComicDetailByIdAndComicId(Long id, Comic comicId) {
         return comicDetailImpl.findByIdAndComicId(id,comicId);
     }
 }

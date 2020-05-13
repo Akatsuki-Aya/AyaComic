@@ -3,6 +3,8 @@ package com.example.aya.demo.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.example.aya.demo.dao.*;
 import com.example.aya.demo.service.*;
+import com.google.gson.JsonObject;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,22 +41,24 @@ public class ComicController {
 
 
     @RequestMapping("/toComicShow")
-    public String toUploadImgFile(Model model,Long comicId){
+    public String toComicShow(Model model,Long comicId){
         if (!checkIsLogin()){
             return "redirect:/user/toLogin";
         }
-        comicId = 3L;
+        comicId = 2L;
         HttpSession session = request.getSession();
         Long userId = (Long)session.getAttribute("userId");
         Comic comic = comicService.findComicById(comicId);
+        Comic comicCopy = new Comic();
+        BeanUtils.copyProperties(comic,comicCopy);
         ComicCollect comicCollect = comicCollectService.findComicCollectByUserIdAndComicId(userId, comicId);
-        comic.setAddress(addressService.findByIdReturnName(Long.valueOf(comic.getAddress())));
-        comic.setProgress(progressService.findByIdReturnName(Long.valueOf(comic.getProgress())));
-        comic.setClassfiy(classfiyService.findByIdReturnName(Long.valueOf(comic.getClassfiy())));
+        comicCopy.setAddress(addressService.findByIdReturnName(Long.valueOf(comic.getAddress())));
+        comicCopy.setProgress(progressService.findByIdReturnName(Long.valueOf(comic.getProgress())));
+        comicCopy.setClassfiy(classfiyService.findByIdReturnName(Long.valueOf(comic.getClassfiy())));
         ComicHistory comicHistory = comicHistoryService.findComicHistoryByUserIdAndComicId(userId, comicId);
         comicHistory = this.checkComicHistory(comicHistory,comic,userId);
         comicHistoryService.saveComicHistory(comicHistory);
-        model.addAttribute("comic",comic);
+        model.addAttribute("comic",comicCopy);
         model.addAttribute("comicCollect",comicCollect);
         model.addAttribute("comicHistory",comicHistory);
 
@@ -82,6 +86,35 @@ public class ComicController {
         }
         return result.toJSONString();
     }
+
+    @RequestMapping("/updateHistory")
+    @ResponseBody
+    public String updateHistory(Long comicId, Long comicDetailId) {
+        JSONObject result = new JSONObject();
+        HttpSession session = request.getSession();
+        ComicHistory comicHistory = null;
+        Long userId = (Long)session.getAttribute("userId");
+        if (comicId != null){
+            comicHistory = comicHistoryService.findComicHistoryByUserIdAndComicId(userId, comicId);
+            Comic comic = new Comic();
+            comic.setId(comicId);
+            if (comicDetailId != null){
+                ComicDetail comicDetail = comicDetailService.findComicDetailByIdAndComicId(comicDetailId, comic);
+                if (comicDetail!=null){
+                    comicHistory.setUpdateTime(new Date());
+                    comicHistory.setComicDetailId(comicDetailId);
+                    result.put("msg", "历史添加成功");
+                    result.put("comicHistory", comicHistory);
+                    comicHistoryService.saveComicHistory(comicHistory);
+                    return result.toJSONString();
+                }
+            }
+        }
+        result.put("msg", "历史添加失败");
+        result.put("comicHistory", comicHistory);
+        comicHistoryService.saveComicHistory(comicHistory);
+        return result.toJSONString();
+    }
     public boolean checkIsLogin(){
         HttpSession session = request.getSession();
         Object userId = session.getAttribute("userId");
@@ -93,21 +126,24 @@ public class ComicController {
     }
     public ComicHistory checkComicHistory(ComicHistory comicHistory,Comic comic,Long userId){
         if(comicHistory != null){
-            Long comicDetailId = comicHistory.getComicDetailId();
-            ComicDetail comicDetailById = comicDetailService.findComicDetailByIdAndComicId(comicDetailId,comic.getId());
-            if (comicDetailById != null ){
-            }else {
-                List<ComicDetail> comicDetailList = comic.getComicDetailList();
-                Long detailId = null;
-                if (comicDetailList != null && comicDetailList.size()>0){
-                    detailId=comicDetailList.get(0).getId();
-                }
-                comicHistory.setComicDetailId(detailId);
-            }
             comicHistory.setUpdateTime(new Date());
         }else {
             comicHistory = new ComicHistory(userId,comic.getId(),new Date());
+            comicHistory.setUpdateTime(new Date());
         }
+        Long comicDetailId = comicHistory.getComicDetailId();
+        if (comicDetailId != null) {
+            ComicDetail comicDetailByIdAndComicId = comicDetailService.findComicDetailByIdAndComicId(comicDetailId, comic);
+            if (comicDetailByIdAndComicId != null){
+                return comicHistory;
+            }
+        }
+        List<ComicDetail> comicDetailList = comic.getComicDetailList();
+        Long detailId = null;
+        if (comicDetailList != null && comicDetailList.size()>0){
+            detailId=comicDetailList.get(0).getId();
+        }
+        comicHistory.setComicDetailId(detailId);
         return comicHistory;
     }
 }
