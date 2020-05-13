@@ -19,7 +19,7 @@ public class ComicDetail implements Serializable {
     private Comic comicId;
     @Column
     private String name;
-    @Column
+    @Column(columnDefinition ="text")
     private String urls;
     @Column(name = "create_time")
     private Date createTime;

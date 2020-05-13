@@ -94,6 +94,7 @@
         
 
     </style>
+
     
   </head>
   <body>
@@ -106,7 +107,7 @@
             </div>
             <div class="col-md-9">
                 <!-- <h1 class="comic-title">关于早坂爱是爷老婆，爷要打出来这件事</h1> -->
-                <h1 class="comic-title" th:text="${comic.title}">漫画标题1</h1>
+                <h1 class="comic-title" th:text="${comic.title}" th:attr="comicId=${comic.id}">漫画标题1</h1>
                 <h3 class="comic-from" th:text="${comic.author}+','+${comic.publishingHouse}">作者，出版社/汉化组</h3>
                 <h5 class="comic-class"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span> <span th:text="${comic.classfiy}+','+${comic.address}+','+${comic.progress}"></span></h5>
                 <div class="comic-desc" style="display: block">
@@ -116,8 +117,8 @@
                  </p>
                 </div>
                 <div class="comic-button">
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=".show-comic" style="width: 200px;">开始阅读</button>
-                    <button type="button" class="btn btn-default btn-lg" style="width: 144px;"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>收藏</button>
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=".show-comic" style="width: 200px;" onclick="changeComic(1);">开始阅读</button>
+                    <button type="button" class="btn btn-default btn-lg"  onclick="changeCollect();" style="width: 144px;"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span><span class="isCollect" th:if="${comicCollect} == null">收藏</span><span th:if="${comicCollect} != null" class="isCollect">已收藏</span></button>
                 </div>
             </div>
         </div>
@@ -126,7 +127,7 @@
             <h2>章节列表</h2>
           </div>
           <div class="comic-list-button">
-              <button th:each="comicDetail,iterStat : ${comic.comicDetailList}" th:text="|${comicDetail.name}|">1 重生之奥尔加</button>
+              <button th:each="comicDetail,iterStat : ${comic.comicDetailList}" th:text="|${comicDetail.name}|" th:attr="urls=${comicDetail.urls}, id='comicDetailId-'+${comicDetail.id}" data-toggle="modal" data-target=".show-comic" onclick="showComic(this)"  >1 重生之奥尔加</button>
 
           </div>
         </div>
@@ -147,10 +148,10 @@
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <img data-src="holder.js/100%x180" alt="100%x180" style="width: 100%; display: inline-block;" src="http://q9zpxt4cr.bkt.clouddn.com/image/test/1gogopher.jpg" data-holder-rendered="true">   
-            <img data-src="holder.js/100%x180" alt="100%x180" style="width: 100%; display: inline-block;" src="http://q9zpxt4cr.bkt.clouddn.com/image/test/1gogopher.jpg" data-holder-rendered="true">   
-            <img data-src="holder.js/100%x180" alt="100%x180" style="width: 100%; display: inline-block;" src="http://q9zpxt4cr.bkt.clouddn.com/image/test/1gogopher.jpg" data-holder-rendered="true">   
-            <img data-src="holder.js/100%x180" alt="100%x180" style="width: 100%; display: inline-block;" src="http://q9zpxt4cr.bkt.clouddn.com/image/test/1gogopher.jpg" data-holder-rendered="true">   
-
+            <span id="img_list_end"></span>
+          </div>
+          <div style="display:none">
+             <img id="img_demo" data-src="holder.js/100%x180" alt="100%x180" style="width: 100%; display: inline-block;" src="http://q9zpxt4cr.bkt.clouddn.com/image/test/1gogopher.jpg" data-holder-rendered="true">
           </div>
         </div>
       </div>
@@ -160,5 +161,49 @@
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
     <script src="../bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
     <script src="../bootstrap-3.3.7/js/carousel.js"></script>
+      <script>
+          function  changeComic(id) {
+              //id=1;
+              id="#comicDetailId-"+id.toString();
+              var list = $(id).attr("urls");
+              list = JSON.parse(list);
+              var imgListEnd = $("#img_list_end");
+              var child= $(".modal-content").children();
+              for(var i =0;i<child.length-1;i++){
+                  child[i].remove();
+              }
+              console.log(list.length);
+              for (var i=0; i < list.length;i++ ){
+                  var url = list[i];
+                  var imgDemo = $("#img_demo").clone();
+                  imgDemo.attr("src",url);
+                  imgListEnd.before(imgDemo);
+              }
+          }
+          var mydata ;
+          function showComic(value) {
+              var id= $(value).attr("id").substr(14);
+              changeComic(id);
+          }
+          function changeCollect() {
+              var comicId = $(".comic-title").attr("comicId");
+              $.ajax({
+                  type:"POST",
+                  url:"addComicCollect",
+                  // data:{"id":val},     // data参数是可选的，有多种写法，也可以直接在url参数拼接参数上去，例如这样：url:"getUser?id="+val,
+                  data:{comicId:comicId},
+                  async:true,   // 异步，默认开启，也就是$.ajax后面的代码是不是跟$.ajx里面的代码一起执行
+                  dataType:"json",   // 返回浏览器的数据类型，指定是json格式，前端这里才可以解析json数据
+                  success:function(data){
+                      mydata=data;
+                      $(".isCollect").text(data.isCollect);
+                      //alert("上传成功");
+                  },
+                  error:function() {
+                      alert("error");
+                  }
+              });
+          }
+      </script>
   </body>
 </html>

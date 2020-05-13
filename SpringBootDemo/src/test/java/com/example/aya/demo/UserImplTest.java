@@ -2,7 +2,9 @@ package com.example.aya.demo;
 
 
 import com.example.aya.demo.dao.Comic;
+import com.example.aya.demo.dao.ComicCollect;
 import com.example.aya.demo.dao.User;
+import com.example.aya.demo.dao.impl.ComicCollectImpl;
 import com.example.aya.demo.dao.impl.ComicImpl;
 import com.example.aya.demo.dao.impl.UserImpl;
 import org.junit.Assert;
@@ -22,13 +24,16 @@ public class UserImplTest {
     private UserImpl userImpl;
     @Autowired
     private ComicImpl comicImpl;
+    @Autowired
+    private ComicCollectImpl comicCollect;
     @Test
     public void test() throws Exception{
-        Comic comic = new Comic();
-        comic.setTitle("aaa");
-        comic.setCreateTime(new Date());
-        Comic save = comicImpl.save(comic);
-        System.out.println( save);
+        ComicCollect comic = new ComicCollect();
+
+        ComicCollect byComicIdAndUserId = comicCollect.findByComicIdAndUserId(3L, 15L);
+        System.out.println(byComicIdAndUserId);
+
+        System.out.println(comic);
 
 
         /*userImpl.save(new User("aa1", "aa@126.com", "aa", "aa123456",formattedDate));
