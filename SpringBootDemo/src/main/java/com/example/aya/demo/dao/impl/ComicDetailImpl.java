@@ -10,4 +10,5 @@ public interface ComicDetailImpl extends JpaRepository<ComicDetail, Long> {
 
     @Override
     ComicDetail save(ComicDetail comicDetail);
+    ComicDetail findByIdAndComicId(Long id,Long comicId);
 }

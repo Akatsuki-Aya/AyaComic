@@ -117,7 +117,7 @@
                  </p>
                 </div>
                 <div class="comic-button">
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=".show-comic" style="width: 200px;" onclick="changeComic(1);">开始阅读</button>
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=".show-comic" style="width: 200px;" onclick="changeComic(); " th:attr="historyId=${comicDetailId}" id="startComic">开始阅读</button>
                     <button type="button" class="btn btn-default btn-lg"  onclick="changeCollect();" style="width: 144px;"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span><span class="isCollect" th:if="${comicCollect} == null">收藏</span><span th:if="${comicCollect} != null" class="isCollect">已收藏</span></button>
                 </div>
             </div>
@@ -162,8 +162,9 @@
     <script src="../bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
     <script src="../bootstrap-3.3.7/js/carousel.js"></script>
       <script>
-          function  changeComic(id) {
+          function  changeComic() {
               //id=1;
+              var id = $("#startComic").attr("historyId");
               id="#comicDetailId-"+id.toString();
               var list = $(id).attr("urls");
               list = JSON.parse(list);
@@ -183,7 +184,8 @@
           var mydata ;
           function showComic(value) {
               var id= $(value).attr("id").substr(14);
-              changeComic(id);
+              $("#startComic").attr("historyId",id);
+              changeComic();
           }
           function changeCollect() {
               var comicId = $(".comic-title").attr("comicId");

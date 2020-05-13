@@ -6,6 +6,8 @@ import com.example.aya.demo.service.ComicDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * @author Aya
  */
@@ -17,5 +19,10 @@ public class ComicDetailServiceImpl implements ComicDetailService {
     @Override
     public ComicDetail saveComicDetail(ComicDetail comicDetail) {
         return comicDetailImpl.save(comicDetail);
+    }
+
+    @Override
+    public ComicDetail findComicDetailByIdAndComicId(Long id,Long comicId) {
+        return comicDetailImpl.findByIdAndComicId(id,comicId);
     }
 }
