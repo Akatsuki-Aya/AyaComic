@@ -34,7 +34,7 @@ public class Comic implements Serializable {
     private Date createTime;
     @Column(name = "update_time")
     private Date updateTime;
-    @OneToMany(mappedBy = "comicId",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "comicId",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
     private List<ComicDetail> comicDetailList;
 
     public List<ComicDetail> getComicDetailList() {

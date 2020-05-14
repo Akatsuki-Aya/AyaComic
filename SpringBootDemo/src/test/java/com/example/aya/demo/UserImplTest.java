@@ -8,6 +8,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.DateFormat;
@@ -31,8 +35,14 @@ public class UserImplTest {
     private UpComicImpl upComicImpl;
     @Test
     public void test() throws Exception{
-        List<UpComic> byUserId = upComicImpl.findByUserId(15L);
-        System.out.println(byUserId.size());
+        Pageable pageable = PageRequest.of(0,16,Sort.by(Sort.Direction.ASC,"id"));
+        Page<Comic> all = comicImpl.findAll(pageable);
+        System.out.println(all.getTotalElements());
+        System.out.println(all.getTotalPages());
+        System.out.println(all.toList());
+        List<Comic> content = all.getContent();
+        System.out.println(content);
+
 
 
         /*userImpl.save(new User("aa1", "aa@126.com", "aa", "aa123456",formattedDate));

@@ -14,7 +14,7 @@ public class ComicDetail implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false,fetch = FetchType.LAZY)
     @JoinColumn(name = "comic_id")
     private Comic comicId;
     @Column
