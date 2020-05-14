@@ -32,7 +32,7 @@ public class LoginController {
             HttpSession session = request.getSession();
             User user = userService.findUserByUserName(username);
             session.setAttribute("userId",user.getId());
-            return "redirect:/upload/toUploadImgFile";
+            return "redirect:/upload/toUploadManage";
         } else {
             model.addAttribute("msgErrorFlag", false);
             model.addAttribute("errorMsg", "用户名或密码出错");

@@ -6,6 +6,8 @@ import com.example.aya.demo.service.UpComicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author Aya
  */
@@ -16,5 +18,9 @@ public class UpComicServiceImpl implements UpComicService {
     @Override
     public UpComic saveUpComicService(UpComic upComic) {
         return upComicImpl.save(upComic);
+    }
+    @Override
+    public List<UpComic> findUpComicByUserId(Long userId){
+        return upComicImpl.findByUserId(userId);
     }
 }

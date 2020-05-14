@@ -99,7 +99,7 @@
             <div>
                 <div class="comic-num-list-wrap">
                     <ul class="comic-num-list">
-                        <li class="comic-num-item " draggable="true">test1</li>
+                        <li class="comic-num-item" modalid="upload-0" id="upload-0" th:each="comicDetail,iterStat : ${comic.comicDetailList}" th:text="${comicDetail.name}" th:attr="detailId=${comicDetail.id},modalid='upload-'+${iterStat.index},id='upload-'+${iterStat.index},uped_urls=${comicDetail.urls},createTime=${comicDetail.createTime}">hello world</li>
                         <li class="add-item">
                             <input type="text" maxlength="20" class="comic-num" placeholder="第一话 hello,world">
                             <span class="tip">按回车Enter创建话数</span>
@@ -116,49 +116,49 @@
                     <div class="form-group">
                       <label for="inputTitle" class="col-sm-2 control-label">标题</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputTitle" name="title" placeholder="标题">
+                        <input type="text" class="form-control" id="inputTitle" name="title" placeholder="标题" th:value="${comic.title}">
                       </div>
                     </div>
                     <div class="form-group">
                         <label for="inputAuthor" class="col-sm-2 control-label">作者</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputAuthor" name="author" placeholder="作者">
+                          <input type="text" class="form-control" id="inputAuthor" name="author" placeholder="作者" th:value="${comic.author}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputPublish" class="col-sm-2 control-label">出版社</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputPublish" name="publishingHouse" placeholder="出版社或者汉化组">
+                          <input type="text" class="form-control" id="inputPublish" name="publishingHouse" placeholder="出版社或者汉化组"  th:value="${comic.publishingHouse}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputClass" class="col-sm-2 control-label">类别</label>
                         <div class="col-sm-10">
                           <select class="form-control" id="inputClass" name="classfiy" >
-                            <option th:each="classfiy:${classfiyList}" th:text="${classfiy.classfiyName}" th:value="${classfiy.id}"></option>
+                            <option th:each="classfiy:${classfiyList}" th:text="${classfiy.classfiyName}" th:value="${classfiy.id}" th:field="${comic.classfiy}"></option>
                           </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputAddress" class="col-sm-2 control-label">地区</label>
                         <div class="col-sm-10">
-                          <select class="form-control" id="inputAddress" name="address">
-                              <option th:each="address:${addressList}" th:text="${address.addressName}" th:value="${address.id}"></option>
+                          <select class="form-control" id="inputAddress" name="address" >
+                              <option th:each="address:${addressList}" th:text="${address.addressName}" th:value="${address.id}" th:field="${comic.address}"></option>
                           </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputComplete" class="col-sm-2 control-label">进度</label>
                         <div class="col-sm-10">
-                          <select class="form-control" id="inputComplete" name="progress">
-                              <option th:each="progress:${progressesList}" th:text="${progress.progressName}" th:value="${progress.id}"></option>
+                          <select class="form-control" id="inputComplete" name="progress" >
+                              <option th:each="progress:${progressesList}" th:text="${progress.progressName}" th:value="${progress.id}" th:field="${comic.progress}"></option>
                           </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputDesc" class="col-sm-2 control-label">简介</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="inputDesc" name="description" rows="3"></textarea>
+                            <textarea class="form-control" id="inputDesc" name="description" rows="3" th:text="${comic.description}"></textarea>
                         </div>
                     </div>
                     <div style="text-align: right;">

@@ -1,10 +1,7 @@
 package com.example.aya.demo;
 
 
-import com.example.aya.demo.dao.Comic;
-import com.example.aya.demo.dao.ComicCollect;
-import com.example.aya.demo.dao.ComicHistory;
-import com.example.aya.demo.dao.User;
+import com.example.aya.demo.dao.*;
 import com.example.aya.demo.dao.impl.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,11 +27,12 @@ public class UserImplTest {
     private ComicHistoryImpl comicHistoryImpl;
     @Autowired
     private ComicDetailImpl comicDetailImpl;
+    @Autowired
+    private UpComicImpl upComicImpl;
     @Test
     public void test() throws Exception{
-        Comic comic = new Comic();
-        comic.setId(2L);
-        comicDetailImpl.findByIdAndComicId(1L, comic);
+        List<UpComic> byUserId = upComicImpl.findByUserId(15L);
+        System.out.println(byUserId.size());
 
 
         /*userImpl.save(new User("aa1", "aa@126.com", "aa", "aa123456",formattedDate));

@@ -49,10 +49,12 @@ public class UploadController {
 
 
     @RequestMapping("/toUploadImgFile")
-    public String toUploadImgFile(Model model){
-        if (!checkIsLogin()){
+    public String toUploadImgFile(Model model, Long comicId) {
+        if (!checkIsLogin()) {
             return "redirect:/user/toLogin";
         }
+        Comic comicById = comicService.findComicById(comicId);
+        model.addAttribute("comic",comicById);
         this.getAllClassifyAddressProgress(model);
         return "/userManage/comicUpload";
     }
@@ -61,7 +63,18 @@ public class UploadController {
         if (!checkIsLogin()){
             return "redirect:/user/toLogin";
         }
-
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        List<UpComic> upComicList = upComicService.findUpComicByUserId(userId);
+        List<Comic> comicList = new ArrayList<>();
+        if(upComicList != null && upComicList.size()>0){
+            for (UpComic upComic : upComicList) {
+                Long comicId = upComic.getComicId();
+                Comic comicById = comicService.findComicById(comicId);
+                comicList.add(comicById);
+            }
+        }
+        model.addAttribute("comicList",comicList);
         return "/userManage/comicUploadManage";
     }
 
