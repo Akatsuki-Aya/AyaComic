@@ -26,4 +26,10 @@ public class ComicDetailServiceImpl implements ComicDetailService {
     public ComicDetail findComicDetailByIdAndComicId(Long id, Comic comicId) {
         return comicDetailImpl.findByIdAndComicId(id,comicId);
     }
+
+    @Override
+    public void deleteComicDetailById(Long id){
+        comicDetailImpl.deleteById(id);
+        return;
+    }
 }

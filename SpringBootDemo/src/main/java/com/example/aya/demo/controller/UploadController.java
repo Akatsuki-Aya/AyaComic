@@ -53,7 +53,10 @@ public class UploadController {
         if (!checkIsLogin()) {
             return "redirect:/user/toLogin";
         }
-        Comic comicById = comicService.findComicById(comicId);
+        Comic comicById = new Comic();
+        if (comicId != null) {
+            comicById = comicService.findComicById(comicId);
+        }
         model.addAttribute("comic",comicById);
         this.getAllClassifyAddressProgress(model);
         return "/userManage/comicUpload";
@@ -102,28 +105,58 @@ public class UploadController {
     @RequestMapping(value = "/addComic", method = RequestMethod.POST)
     public String addComic(Comic comic, String comicJson) {
         //漫画添加
-        comic.setCreateTime(new Date());
+        boolean isNew = true;
+        if(comic.getId()!= null){
+            isNew =false;
+            Comic comicById = comicService.findComicById(comic.getId());
+            if (comicById!= null){
+                comic.setCreateTime(comicById.getCreateTime());
+            }else {
+                comic.setCreateTime(new Date());
+            }
+        }else {
+            comic.setCreateTime(new Date());
+        }
         comic.setUpdateTime(new Date());
         Comic savedComic = comicService.saveComic(comic);
         System.out.println(savedComic.getId());
         //漫画详细添加
         JSONArray comicJsonList = JSONObject.parseArray(comicJson);
-        List<ComicDetail> listComicDetail = new ArrayList<>();
         for (int i = 0; i < comicJsonList.size(); i++) {
             ComicDetail comicDetail = comicJsonList.getObject(i, ComicDetail.class);
+            if (comicDetail.getId()!=null){
+                ComicDetail comicDetailByIdAndComicId = comicDetailService.findComicDetailByIdAndComicId(comic.getId(), comic);
+                if (comicDetailByIdAndComicId != null ){
+                    comicDetail.setCreateTime(comicDetailByIdAndComicId.getCreateTime());
+                }
+            }else {
+                comicDetail.setCreateTime(new Date());
+            }
             comicDetail.setComicId(savedComic);
-            comicDetail.setCreateTime(new Date());
             comicDetailService.saveComicDetail(comicDetail);
         }
         //up漫画联系添加
-        HttpSession session = request.getSession();
-        Long userId = (Long)session.getAttribute("userId");
-        Long comicId = savedComic.getId();
-        UpComic upComic = new UpComic(userId,comicId);
-        upComicService.saveUpComicService(upComic);
-
+        if(!isNew){
+        }else {
+            HttpSession session = request.getSession();
+            Long userId = (Long)session.getAttribute("userId");
+            Long comicId = savedComic.getId();
+            UpComic upComic = new UpComic(userId,comicId);
+            upComicService.saveUpComicService(upComic);
+        }
         JSONObject result = new JSONObject();
         result.put("msg", "上传成功");
+        result.put("data", "ajaxReturn");
+        return result.toJSONString();
+    }
+    @ResponseBody
+    @RequestMapping(value = "/deleteComicDetail", method = RequestMethod.POST)
+    public String  deleteComicDetail(Long comicDetailId){
+        if (comicDetailId != null){
+            comicDetailService.deleteComicDetailById(comicDetailId);
+        }
+        JSONObject result = new JSONObject();
+        result.put("msg", "删除成功");
         result.put("data", "ajaxReturn");
         return result.toJSONString();
     }

@@ -9,4 +9,5 @@ import com.example.aya.demo.dao.ComicDetail;
 public interface ComicDetailService {
     ComicDetail saveComicDetail(ComicDetail comicDetail);
     ComicDetail findComicDetailByIdAndComicId(Long id, Comic comicId);
+    void deleteComicDetailById(Long id);
 }
