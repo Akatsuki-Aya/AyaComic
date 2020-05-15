@@ -8,6 +8,10 @@ import com.example.aya.demo.util.QiNiuUtil;
 import com.google.gson.JsonObject;
 import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,13 +66,22 @@ public class UploadController {
         return "/userManage/comicUpload";
     }
     @RequestMapping("/toUploadManage")
-    public String toUploadManage(Model model){
+    public String toUploadManage(Model model,Integer pageNumber){
         if (!checkIsLogin()){
             return "redirect:/user/toLogin";
         }
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
-        List<UpComic> upComicList = upComicService.findUpComicByUserId(userId);
+        Pageable pageable=null ;
+        if(pageNumber != null){
+            pageable = PageRequest.of(pageNumber - 1, 1, Sort.by(Sort.Direction.ASC, "id"));
+            model.addAttribute("currentPage",pageNumber);
+        }else {
+            model.addAttribute("currentPage",1);
+            pageable = PageRequest.of(0,1, Sort.by(Sort.Direction.ASC,"id"));
+        }
+        Page<UpComic> upComicPage = upComicService.findUpComicByUserId(userId, pageable);
+        List<UpComic> upComicList = upComicPage.getContent();
         List<Comic> comicList = new ArrayList<>();
         if(upComicList != null && upComicList.size()>0){
             for (UpComic upComic : upComicList) {
@@ -78,6 +91,7 @@ public class UploadController {
             }
         }
         model.addAttribute("comicList",comicList);
+        model.addAttribute("page",upComicPage);
         return "/userManage/comicUploadManage";
     }
 

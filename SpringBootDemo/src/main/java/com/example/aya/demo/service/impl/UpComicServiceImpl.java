@@ -4,6 +4,8 @@ import com.example.aya.demo.dao.UpComic;
 import com.example.aya.demo.dao.impl.UpComicImpl;
 import com.example.aya.demo.service.UpComicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +22,7 @@ public class UpComicServiceImpl implements UpComicService {
         return upComicImpl.save(upComic);
     }
     @Override
-    public List<UpComic> findUpComicByUserId(Long userId){
-        return upComicImpl.findByUserId(userId);
+    public Page<UpComic> findUpComicByUserId(Long userId, Pageable pageable){
+        return upComicImpl.findByUserId(userId,pageable);
     }
 }

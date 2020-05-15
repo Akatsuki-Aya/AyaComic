@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>AYAComic | 主页</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+        <title>AYAComic | 主页</title>
 
-    <!-- Bootstrap -->
-    <link href="../bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../bootstrap-3.3.7/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+        <!-- Bootstrap -->
+        <link href="../bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../bootstrap-3.3.7/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="../css/b.page.bootstrap3.css" rel="stylesheet">
     <style>
         body{
             padding-top:50px;
@@ -97,29 +98,13 @@
                     </div>
 
                 </div>
-                <div class="paging" style="text-align: right;margin-right: 80px;">
-                    <nav aria-label="Page navigation">
-                        
-                        <ul class="pagination">
-                          <li>
-                            <a href="#" aria-label="Previous">
-                              <span aria-hidden="true">&laquo;</span>
-                            </a>
-                          </li>
-                          <li><a href="#">1</a></li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">3</a></li>
-                          <li><a href="#">4</a></li>
-                          <li><a href="#">5</a></li>
-                          <li>
-                            <a href="#" aria-label="Next">
-                              <span aria-hidden="true">&raquo;</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </nav>
-                
-            </div>
+                <div class="paging" style="margin-right: 80px;">
+                    <input type="hidden" id="pageNumber" th:value="${currentPage}">
+                    <input type="hidden" id="pageSize" th:value="${1}">
+                    <input type="hidden" id="totalPage" th:value="${page.totalPages}">
+                    <input type="hidden" id="totalRow" th:value="${page.totalElements}">
+                    <div id="page1"></div>
+                </div>
 
             </div>   
 
@@ -144,6 +129,7 @@
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
     <script src="../bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
     <script src="../bootstrap-3.3.7/js/carousel.js"></script>
+    <script src="../js/bpage.js"></script>
     <script>
         var mydata;
         function toUpload(value) {
@@ -151,6 +137,22 @@
             var comicId= $(value).parent().parent().attr("comicId");
             window.location.href="toUploadImgFile?comicId="+comicId;
         }
+        $("#page1").bPage({
+            //页面跳转的目标位置
+            url : 'toUploadManage',
+            //分页数据设置
+            totalPage : $('#totalPage').val(),
+            totalRow : $('#totalRow').val(),
+            pageSize : $('#pageSize').val(),
+            pageNumber : $('#pageNumber').val(),
+            //页面跳转时需要同时传递给服务端的自定义参数设置
+            params : function(){
+                return {
+                    //userName : 'zhangsan',
+                    //age : 42
+                };
+            }
+        });
     </script>
   </body>
 </html>

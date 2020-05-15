@@ -1,6 +1,8 @@
 package com.example.aya.demo.service;
 
 import com.example.aya.demo.dao.UpComic;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -9,5 +11,5 @@ import java.util.List;
  */
 public interface UpComicService {
     UpComic saveUpComicService(UpComic upComic);
-    List<UpComic> findUpComicByUserId(Long userId);
+    Page<UpComic> findUpComicByUserId(Long userId, Pageable pageable);
 }

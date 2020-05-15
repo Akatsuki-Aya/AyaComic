@@ -35,11 +35,12 @@ public class UserImplTest {
     private UpComicImpl upComicImpl;
     @Test
     public void test() throws Exception{
-        Pageable pageable = PageRequest.of(0,16,Sort.by(Sort.Direction.ASC,"id"));
+        Pageable pageable = PageRequest.of(2,1,Sort.by(Sort.Direction.ASC,"id"));
         Page<Comic> all = comicImpl.findAll(pageable);
         System.out.println(all.getTotalElements());
         System.out.println(all.getTotalPages());
-        System.out.println(all.toList());
+        System.out.println(all.getNumber());
+        //System.out.println(all.toList());
         List<Comic> content = all.getContent();
         System.out.println(content);
 
