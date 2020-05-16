@@ -1,8 +1,12 @@
 package com.example.aya.demo;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.example.aya.demo.dao.*;
 import com.example.aya.demo.dao.impl.*;
+import com.example.aya.demo.service.ComicService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -33,16 +38,19 @@ public class UserImplTest {
     private ComicDetailImpl comicDetailImpl;
     @Autowired
     private UpComicImpl upComicImpl;
+    @Autowired
+    private ComicService comicService;
+    @Autowired
+    private ClassfiyImpl classfiyImpl;
     @Test
     public void test() throws Exception{
-        Pageable pageable = PageRequest.of(2,1,Sort.by(Sort.Direction.ASC,"id"));
-        Page<Comic> all = comicImpl.findAll(pageable);
-        System.out.println(all.getTotalElements());
-        System.out.println(all.getTotalPages());
-        System.out.println(all.getNumber());
-        //System.out.println(all.toList());
-        List<Comic> content = all.getContent();
-        System.out.println(content);
+        List<Classfiy> classfiyList = classfiyImpl.findAll();
+        String s = JSON.toJSONString(classfiyList);
+        System.out.println(s);
+        JSONArray objects = JSON.parseArray(s);
+        objects.getJSONObject("1");
+
+        System.out.println(objects.toJSONString());
 
 
 

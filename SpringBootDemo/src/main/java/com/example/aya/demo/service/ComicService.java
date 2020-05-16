@@ -16,4 +16,5 @@ public interface ComicService {
     Comic saveComic(Comic comic);
     Comic findComicById(Long id);
     Page<Comic> findAll(Pageable pageable);
+    Page<Comic> findByCondition(Integer page, Comic comic);
 }

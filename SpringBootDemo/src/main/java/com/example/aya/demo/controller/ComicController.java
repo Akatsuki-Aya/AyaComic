@@ -6,9 +6,11 @@ import com.example.aya.demo.service.*;
 import com.google.gson.JsonObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,11 +67,22 @@ public class ComicController {
         return "/comicMainPage/comicShow";
     }
     @RequestMapping("/toClassfiy")
-    public String toClassfiy(Model model){
+    public String toClassfiy(Model model,
+     @RequestParam(value = "classfiyId",defaultValue = "0") Long classfiyId,
+     @RequestParam(value = "addressId",defaultValue = "0") Long addressId,
+     @RequestParam(value = "progressId",defaultValue = "0") Long progressId){
         if (!checkIsLogin()){
             return "redirect:/user/toLogin";
         }
-
+        this.getAllClassifyAddressProgress(model);
+        this.checkSelectedTagAndAdd(model,classfiyId,addressId,progressId);
+        Comic comic = new Comic();
+        comic.setClassfiy(Long.toString(classfiyId));
+        comic.setAddress(Long.toString(addressId));
+        comic.setProgress(Long.toString(progressId));
+        Page<Comic> comicPage = comicService.findByCondition(0, comic);
+        List<Comic> comicList = comicPage.getContent();
+        model.addAttribute("comicList",comicList);
         return "/comicMainPage/classify";
     }
 
@@ -153,5 +166,20 @@ public class ComicController {
         }
         comicHistory.setComicDetailId(detailId);
         return comicHistory;
+    }
+    public void getAllClassifyAddressProgress(Model model){
+        List<Classfiy> classfiyList = classfiyService.findAll();
+        List<Address> addressList = addressService.findAll();
+        List<Progress> progressesList = progressService.findAll();
+
+        model.addAttribute("classfiyList",classfiyList);
+        model.addAttribute("addressList",addressList);
+        model.addAttribute("progressesList",progressesList);
+    }
+    public void checkSelectedTagAndAdd(Model model,Long classId,Long addressId,Long progressId){
+        model.addAttribute("classId",classId);
+        model.addAttribute("addressId",addressId);
+        model.addAttribute("progressId",progressId);
+
     }
 }
