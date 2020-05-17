@@ -3,6 +3,8 @@ package com.example.aya.demo.dao.impl;
 import com.example.aya.demo.dao.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 /**
  * @author Aya
  */
@@ -21,6 +23,9 @@ public interface UserImpl extends JpaRepository<User,Long> {
      * @return
      */
     User findByUserNameOrIdCard(String username, String idCard);
+
+    @Override
+    Optional<User> findById(Long id);
 
 
 }

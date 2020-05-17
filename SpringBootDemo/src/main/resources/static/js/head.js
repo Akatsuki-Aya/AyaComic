@@ -24,7 +24,7 @@ document.writeln("                <li><a href=\'http://localhost/upload/toComicC
 document.writeln("                <li><a href=\'http://localhost/upload/toComicHistory\'>历史浏览</a></li>");
 document.writeln("                <li><a href=\'http://localhost/upload/toUploadManage\'>我的投稿</a></li>");
 document.writeln("                <li role=\'separator\' class=\'divider\'></li>");
-document.writeln("                <li><a href=\'#\'>个人主页</a></li>");
+document.writeln("                <li><a href=\'http://localhost/upload/toUserInfo\'>个人主页</a></li>");
 document.writeln("                <li><a href=\'#\'>退出</a></li>");
 document.writeln("              </ul>");
 document.writeln("            </li>");

@@ -38,4 +38,6 @@ public interface UserService {
      * @return
      */
     User findUserByUserName(String userName);
+    User findUserById(Long id);
+    User modify(User user);
 }

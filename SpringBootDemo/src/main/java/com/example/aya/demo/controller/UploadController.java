@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.aya.demo.dao.*;
 import com.example.aya.demo.service.*;
+import com.example.aya.demo.util.CheckUtil;
 import com.example.aya.demo.util.QiNiuUtil;
 import com.google.gson.JsonObject;
 import org.apache.catalina.connector.Request;
@@ -54,6 +55,8 @@ public class UploadController {
     private ComicCollectService comicCollectService;
     @Autowired
     private ComicHistoryService comicHistoryService;
+    @Autowired
+    private UserService userService;
 
 
     @RequestMapping("/toUploadImgFile")
@@ -153,6 +156,45 @@ public class UploadController {
         model.addAttribute("comicList",comicList);
         model.addAttribute("page",comicHistory);
         return "/userManage/comicHistory";
+    }
+
+    @RequestMapping("/toUserInfo")
+    public String toUserInfo(Model model) {
+        if (!checkIsLogin()){
+            return "redirect:/user/toLogin";
+        }
+        HttpSession session = request.getSession();
+        Long userId = (Long)session.getAttribute("userId");
+        User user = userService.findUserById(userId);
+        model.addAttribute("user",user);
+        return "/userManage/userInfo";
+    }
+    @ResponseBody
+    @RequestMapping(value = "/modifyUserInfo")
+    public String modifyUserInfo(Model model,String email,String phone){
+        HttpSession session = request.getSession();
+        Long userId = (Long)session.getAttribute("userId");
+        if (userId!=null){
+        }else {
+            JSONObject result = new JSONObject();
+            result.put("status","error");
+            result.put("msg","无法获取用户id");
+            return result.toJSONString();
+        }
+        User user = userService.findUserById(userId);
+        if (!CheckUtil.isMobileNO(phone)){
+            JSONObject result = new JSONObject();
+            result.put("status","error");
+            result.put("msg","非法手机号");
+            return result.toJSONString();
+        }
+        user.setPhone(phone);
+        user.setEmail(email);
+        userService.modify(user);
+        JSONObject result = new JSONObject();
+        result.put("status","success");
+        result.put("msg","修改成功");
+        return result.toJSONString();
     }
 
     @ResponseBody

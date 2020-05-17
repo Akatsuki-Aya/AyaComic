@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
 
+import java.util.Optional;
+
 /**
  * @author aya
  */
@@ -72,6 +74,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByUserName(String userName){
         return userimpl.findByUserName(userName);
+    }
+    @Override
+    public User findUserById(Long id){
+        Optional<User> user = userimpl.findById(id);
+        return user.isPresent()?user.get():null;
+    }
+
+    @Override
+    public User modify(User user){
+        return userimpl.save(user);
     }
 
 }

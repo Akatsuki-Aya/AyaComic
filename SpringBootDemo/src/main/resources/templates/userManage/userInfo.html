@@ -88,38 +88,67 @@
                 <a type="button" class="btn btn-info btn-lg to-up" href="toUploadImgFile">投稿</a>
                 <ul class="nav nav-pills nav-stacked nav-pills-stacked-example" >
                     <li role="presentation" ><a href="toComicCollect">我的收藏</a></li>
-                    <li role="presentation" class="active"><a href="toComicHistory">历史记录</a></li>
-                    <li role="presentation"><a href="toUserInfo">个人信息</a></li>
+                    <li role="presentation"><a href="toComicHistory">历史记录</a></li>
+                    <li role="presentation" class="active"><a href="toUserInfo">个人信息</a></li>
                     <li role="presentation" ><a href="toUploadManage">我的投稿</a></li>
                   </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <h1 class="page-header">历史记录</h1>
-                <div class="my-up"> 
-                    <div th:each="comic,iterStat : ${comicList}" class="comic-list" >
-                        <div class="thumbnail" th:attr="comicId=${comic.id}">
-                            <a onclick="toComicShow(this)" role="button" th:attr="value=${comic.id}">
-                                <img data-src="holder.js/100%x180" alt="100%x180" style="height: 180px; width: 100%; display: block;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTcxYzQ3OWVjNzEgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNzFjNDc5ZWM3MSI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI1OS41NDY4NzUiIHk9Ijk0LjUiPjE3MXgxODA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
-                            </a>
-                            <h4 onclick="toComicShow(this)" role="button" th:text="${comic.title}" th:attr="title=${comic.title},value=${comic.id}" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
-                                漫画1
-                            </h4>
-                            <p>
-                                <span th:text="${comic.classfiy}" th:attr="value=${comic.classfiy}"></span>
-                                <span th:text="${comic.address}" th:attr="value=${comic.address}"></span>
-                                <span th:text="${comic.progress}" th:attr="value=${comic.progress}"></span>
-                            </p>
+                <h1 class="page-header">个人信息</h1>
+                <div>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">昵称:</label>
+                            <div class="col-sm-10">
+                                <p class="form-control-static" th:text="${user.userName}">email@example.com</p>
+                            </div>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">身份证号:</label>
+                            <div class="col-sm-10">
+                                <p class="form-control-static" th:text="${user.idCard}">email@example.com</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">姓名:</label>
+                            <div class="col-sm-10">
+                                <p class="form-control-static" th:text="${user.realName}">email@example.com</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">性别:</label>
+                            <div class="col-sm-10">
+                                <p class="form-control-static" th:text="${user.gender}">email@example.com</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">出生日期:</label>
+                            <div class="col-sm-10">
+                                <p class="form-control-static" th:text="${user.birthday}">email@example.com</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-sm-1 control-label">邮箱:</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="inputEmail" placeholder="邮箱" th:value="${user.email}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPhone" class="col-sm-1 control-label">手机号:</label>
+                            <div class="col-sm-10">
+                                <input type="tel" class="form-control" id="inputPhone" placeholder="手机号" th:value="${user.phone}">
+                            </div>
+                        </div>
+                        <div style="text-align: left;margin-left: 50px">
+                            <button style="width: 100px;" type="button" class="btn btn-info btn-lg text-right" onclick="save();" >保存</button>
+                        </div>
+                        <div style="margin-left: 50px;margin-top: 5px;font-size: 14px;">
+                            <a th:href="@{/user/toLogin}">修改密码</a>
+                        </div>
 
+                    </form>
                 </div>
-                <div class="paging" style="margin-right: 80px;">
-                    <input type="hidden" id="pageNumber" th:value="${currentPage}">
-                    <input type="hidden" id="pageSize" th:value="${1}">
-                    <input type="hidden" id="totalPage" th:value="${page.totalPages}">
-                    <input type="hidden" id="totalRow" th:value="${page.totalPages}">
-                    <div id="page1"></div>
-                </div>
+
 
             </div>   
 
@@ -146,40 +175,23 @@
     <script src="../bootstrap-3.3.7/js/carousel.js"></script>
     <script src="../js/bpage.js"></script>
     <script>
-        initSelect();
         var mydata;
-        function initSelect() {
-            var list = $(".comic-list");
-            for(var i =0;i<list.size();i++){
-                var span = $(list[i]).find("span");
-                var cid = $(span[0]).attr("value");
-                var aid = $(span[1]).attr("value");
-                var pid = $(span[2]).attr("value");
-                $(span[0]).text($("#classfiyId-"+cid).text());
-                $(span[1]).text($("#addressId-"+aid).text());
-                $(span[2]).text($("#progressesId-"+pid).text());
-            }
-        }
-
-        $("#page1").bPage({
-            //页面跳转的目标位置
-            url : 'toComicHistory',
-            //分页数据设置
-            totalPage : $('#totalPage').val(),
-            totalRow : $('#totalRow').val(),
-            pageSize : $('#pageSize').val(),
-            pageNumber : $('#pageNumber').val(),
-            //页面跳转时需要同时传递给服务端的自定义参数设置
-            params : function(){
-                return {
-                    //userName : 'zhangsan',
-                    //age : 42
-                };
-            }
-        });
-        function toComicShow(value){
-            var comicId= $(value).attr("value");
-            window.location.href="http://localhost/comic/toComicShow?comicId="+comicId;
+        function save() {
+            $.ajax({
+                type:"POST",
+                url:"modifyUserInfo",
+                // data:{"id":val},     // data参数是可选的，有多种写法，也可以直接在url参数拼接参数上去，例如这样：url:"getUser?id="+val,
+                data:{phone:$("#inputPhone").val(),email:$("#inputEmail").val()},
+                async:true,   // 异步，默认开启，也就是$.ajax后面的代码是不是跟$.ajx里面的代码一起执行
+                dataType:"json",   // 返回浏览器的数据类型，指定是json格式，前端这里才可以解析json数据
+                success:function(data){
+                    mydata = data;
+                    alert(data.msg);
+                },
+                error:function() {
+                    alert("error");
+                }
+            });
         }
     </script>
   </body>
