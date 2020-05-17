@@ -70,7 +70,8 @@ public class ComicController {
     public String toClassfiy(Model model,
      @RequestParam(value = "classfiyId",defaultValue = "0") Long classfiyId,
      @RequestParam(value = "addressId",defaultValue = "0") Long addressId,
-     @RequestParam(value = "progressId",defaultValue = "0") Long progressId){
+     @RequestParam(value = "progressId",defaultValue = "0") Long progressId,
+     @RequestParam(value = "pageNumber",defaultValue = "0") Integer pageNumber ){
         if (!checkIsLogin()){
             return "redirect:/user/toLogin";
         }
@@ -80,9 +81,16 @@ public class ComicController {
         comic.setClassfiy(Long.toString(classfiyId));
         comic.setAddress(Long.toString(addressId));
         comic.setProgress(Long.toString(progressId));
-        Page<Comic> comicPage = comicService.findByCondition(0, comic);
+        Page<Comic> comicPage;
+        if(pageNumber > 0){
+            comicPage = comicService.findByCondition(pageNumber-1, comic);
+        }else {
+            comicPage = comicService.findByCondition(0, comic);
+        }
         List<Comic> comicList = comicPage.getContent();
         model.addAttribute("comicList",comicList);
+        model.addAttribute("page",comicPage);
+        model.addAttribute("currentPage",pageNumber);
         return "/comicMainPage/classify";
     }
 

@@ -11,6 +11,7 @@
     <link href="../bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../bootstrap-3.3.7/dist/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="../css/carousel.css" rel="stylesheet">
+    <link href="../css/b.page.bootstrap3.css" rel="stylesheet">
     <style>
         .selected{
             color: #00CCFF !important;
@@ -111,41 +112,33 @@
         </section>
         <section class="main-list">
             <div class="row">
-                <div th:each="comic,iterStat : ${comicList}">
+                <div th:each="comic,iterStat : ${comicList}" class="comic-list">
                     <div class="col-xs-6 col-md-2">
                       <div class="thumbnail">
                           <a href="#">
                             <img data-src="holder.js/100%x180" alt="100%x180" style="height: 180px; width: 100%; display: block;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTcxYzQ3OWVjNzEgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNzFjNDc5ZWM3MSI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI1OS41NDY4NzUiIHk9Ijk0LjUiPjE3MXgxODA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
                           </a>
-                          <h4 th:text="${comic.title}">
+                          <h4 th:text="${comic.title}" th:attr="title=${comic.title}" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
                               漫画1
                           </h4>
-                          <p>漫画类型 漫画类型</p>
+                          <p>
+                              <span th:text="${comic.classfiy}" th:attr="value=${comic.classfiy}"></span>
+                              <span th:text="${comic.address}" th:attr="value=${comic.address}"></span>
+                              <span th:text="${comic.progress}" th:attr="value=${comic.progress}"></span>
+                          </p>
                       </div>
                     </div>
                 </div>  
             </div>
         </section>
-        <div class="paging">
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+        <div >
+            <div class="paging" style="margin-right: 80px;">
+                <input type="hidden" id="pageNumber" th:value="${currentPage}">
+                <input type="hidden" id="pageSize" th:value="${1}">
+                <input type="hidden" id="totalPage" th:value="${page.totalPages}">
+                <input type="hidden" id="totalRow" th:value="${page.totalElements}">
+                <div id="page1"></div>
+            </div>
         </div>
     </div>
 
@@ -164,6 +157,7 @@
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
     <script src="../bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
     <script src="../bootstrap-3.3.7/js/carousel.js"></script>
+    <script src="../js/bpage.js"></script>
     <script>
         initSelect();
         var mydata;
@@ -174,6 +168,16 @@
             $("#classfiyId-"+classId).attr("class","selected");
             $("#addressId-"+addressId).attr("class","selected");
             $("#progressesId-"+progressId).attr("class","selected");
+            var list = $(".comic-list");
+            for(var i =0;i<list.size();i++){
+                var span = $(list[i]).find("span");
+                var cid = $(span[0]).attr("value");
+                var aid = $(span[1]).attr("value");
+                var pid = $(span[2]).attr("value");
+                $(span[0]).text($("#classfiyId-"+cid).text());
+                $(span[1]).text($("#addressId-"+aid).text());
+                $(span[2]).text($("#progressesId-"+pid).text());
+            }
         }
         function toClassfiy(value){
             mydata = value;
@@ -191,6 +195,25 @@
             //console.log("classify?classfiyId=" + classId + "&addressId=" + addressId + "&progressId" + progressId);
             window.location.href = "toClassfiy?classfiyId=" + classId + "&addressId=" + addressId + "&progressId=" + progressId;
         }
+        $("#page1").bPage({
+            //页面跳转的目标位置
+            url : 'toClassfiy',
+            //分页数据设置
+            totalPage : $('#totalPage').val(),
+            totalRow : $('#totalRow').val(),
+            pageSize : $('#pageSize').val(),
+            pageNumber : $('#pageNumber').val(),
+            //页面跳转时需要同时传递给服务端的自定义参数设置
+            params : function(){
+                return {
+                    classId:$("#selectedClassId").attr("value"),
+                    addressId:$("#selectedAddressId").attr("value"),
+                    progressId:$("#selectedProgressId").attr("value")
+                    //userName : 'zhangsan',
+                    //age : 42
+                };
+            }
+        });
     </script>
   </body>
 </html>

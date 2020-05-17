@@ -48,7 +48,7 @@ public class UserImplTest {
         String s = JSON.toJSONString(classfiyList);
         System.out.println(s);
         JSONArray objects = JSON.parseArray(s);
-        objects.getJSONObject("1");
+        //objects.getJSONObject("1");
 
         System.out.println(objects.toJSONString());
 
