@@ -121,6 +121,7 @@ public class UploadController {
             }
         }
         this.getAllClassifyAddressProgress(model);
+        model.addAttribute("currentPage",pageNumber);
         model.addAttribute("comicList",comicList);
         model.addAttribute("page",comicCollect);
         return "/userManage/comicCollect";
