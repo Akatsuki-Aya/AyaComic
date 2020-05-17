@@ -126,6 +126,34 @@ public class UploadController {
         model.addAttribute("page",comicCollect);
         return "/userManage/comicCollect";
     }
+    @RequestMapping("/toComicHistory")
+    public String toComicHistory(Model model,@RequestParam(value = "pageNumber",defaultValue = "0") Integer pageNumber){
+        if (!checkIsLogin()){
+            return "redirect:/user/toLogin";
+        }
+        HttpSession session = request.getSession();
+        Long userId = (Long)session.getAttribute("userId");
+        Page<ComicHistory> comicHistory =null;
+        if(pageNumber > 0){
+            comicHistory = comicHistoryService.findByUserId(userId,pageNumber-1);
+        }else {
+            comicHistory = comicHistoryService.findByUserId(userId,0);
+        }
+        List<ComicHistory> comicHistoryList = comicHistory.getContent();
+        List<Comic> comicList = new ArrayList<>();
+        if (comicHistoryList!=null&&comicHistoryList.size()>0){
+            for (ComicHistory history:comicHistoryList){
+                Long comicId = history.getComicId();
+                Comic comicById = comicService.findComicById(comicId);
+                comicList.add(comicById);
+            }
+        }
+        this.getAllClassifyAddressProgress(model);
+        model.addAttribute("currentPage",pageNumber);
+        model.addAttribute("comicList",comicList);
+        model.addAttribute("page",comicHistory);
+        return "/userManage/comicHistory";
+    }
 
     @ResponseBody
     @RequestMapping(value = "/upFile",method= RequestMethod.POST)

@@ -5,6 +5,9 @@ import com.example.aya.demo.dao.ComicHistory;
 import com.example.aya.demo.dao.impl.ComicHistoryImpl;
 import com.example.aya.demo.service.ComicHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -28,4 +31,11 @@ public class ComicHistoryServiceImpl implements ComicHistoryService {
         comicHistoryImpl.deleteById(id);
         return;
     }
+
+    @Override
+    public Page<ComicHistory> findByUserId(Long userId, Integer currentPage){
+        Pageable pageable = PageRequest.of(currentPage,10);
+        return comicHistoryImpl.findByUserId(userId,pageable);
+    }
+
 }

@@ -21,7 +21,7 @@ document.writeln("            <li class=\'dropdown\'>");
 document.writeln("              <a href=\'#\' class=\'dropdown-toggle\' data-toggle=\'dropdown\' role=\'button\' aria-haspopup=\'true\' aria-expanded=\'false\'>用户名 <span class=\'caret\'></span></a>");
 document.writeln("              <ul class=\'dropdown-menu\'>");
 document.writeln("                <li><a href=\'http://localhost/upload/toComicCollect\'>我的收藏</a></li>");
-document.writeln("                <li><a href=\'#\'>历史浏览</a></li>");
+document.writeln("                <li><a href=\'http://localhost/upload/toComicHistory\'>历史浏览</a></li>");
 document.writeln("                <li><a href=\'http://localhost/upload/toUploadManage\'>我的投稿</a></li>");
 document.writeln("                <li role=\'separator\' class=\'divider\'></li>");
 document.writeln("                <li><a href=\'#\'>个人主页</a></li>");

@@ -87,14 +87,14 @@
             <div class="col-sm-3 col-md-2 pill">
                 <a type="button" class="btn btn-info btn-lg to-up" href="toUploadImgFile">投稿</a>
                 <ul class="nav nav-pills nav-stacked nav-pills-stacked-example" >
-                    <li role="presentation" class="active"><a href="toComicCollect">我的收藏</a></li>
-                    <li role="presentation"><a href="toComicHistory">历史记录</a></li>
+                    <li role="presentation" ><a href="toComicCollect">我的收藏</a></li>
+                    <li role="presentation" class="active"><a href="toComicHistory">历史记录</a></li>
                     <li role="presentation"><a href="#">个人信息</a></li>
                     <li role="presentation" ><a href="toUploadManage">我的投稿</a></li>
                   </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <h1 class="page-header">我的收藏</h1>
+                <h1 class="page-header">历史记录</h1>
                 <div class="my-up"> 
                     <div th:each="comic,iterStat : ${comicList}" class="comic-list" >
                         <div class="thumbnail" th:attr="comicId=${comic.id}">
@@ -160,14 +160,10 @@
                 $(span[2]).text($("#progressesId-"+pid).text());
             }
         }
-        function toUpload(value) {
-            //mydata = value;
-            var comicId= $(value).parent().parent().attr("comicId");
-            window.location.href="toUploadImgFile?comicId="+comicId;
-        }
+
         $("#page1").bPage({
             //页面跳转的目标位置
-            url : 'toComicCollect',
+            url : 'toComicHistory',
             //分页数据设置
             totalPage : $('#totalPage').val(),
             totalRow : $('#totalRow').val(),
