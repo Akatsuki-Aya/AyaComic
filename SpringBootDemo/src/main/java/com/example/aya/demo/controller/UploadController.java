@@ -50,6 +50,10 @@ public class UploadController {
     private ComicDetailService comicDetailService;
     @Autowired
     private UpComicService upComicService;
+    @Autowired
+    private ComicCollectService comicCollectService;
+    @Autowired
+    private ComicHistoryService comicHistoryService;
 
 
     @RequestMapping("/toUploadImgFile")
@@ -93,6 +97,33 @@ public class UploadController {
         model.addAttribute("comicList",comicList);
         model.addAttribute("page",upComicPage);
         return "/userManage/comicUploadManage";
+    }
+    @RequestMapping("/toComicCollect")
+    public String toComicCollect(Model model,@RequestParam(value = "pageNumber",defaultValue = "0") Integer pageNumber){
+        if (!checkIsLogin()){
+            return "redirect:/user/toLogin";
+        }
+        HttpSession session = request.getSession();
+        Long userId = (Long)session.getAttribute("userId");
+        Page<ComicCollect> comicCollect =null;
+        if(pageNumber > 0){
+            comicCollect = comicCollectService.findByUserId(pageNumber-1, userId);
+        }else {
+            comicCollect = comicCollectService.findByUserId(0, userId);
+        }
+        List<ComicCollect> comicCollectList = comicCollect.getContent();
+        List<Comic> comicList = new ArrayList<>();
+        if (comicCollectList!=null&&comicCollectList.size()>0){
+            for (ComicCollect collect:comicCollectList){
+                Long comicId = collect.getComicId();
+                Comic comicById = comicService.findComicById(comicId);
+                comicList.add(comicById);
+            }
+        }
+        this.getAllClassifyAddressProgress(model);
+        model.addAttribute("comicList",comicList);
+        model.addAttribute("page",comicCollect);
+        return "/userManage/comicCollect";
     }
 
     @ResponseBody

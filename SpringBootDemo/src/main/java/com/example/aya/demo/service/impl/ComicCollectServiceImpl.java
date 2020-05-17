@@ -4,6 +4,9 @@ import com.example.aya.demo.dao.ComicCollect;
 import com.example.aya.demo.dao.impl.ComicCollectImpl;
 import com.example.aya.demo.service.ComicCollectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,5 +28,10 @@ public class ComicCollectServiceImpl implements ComicCollectService {
     public void  deleteComicCollectById(Long id){
         comicCollectImpl.deleteById(id);
         return;
+    }
+    @Override
+    public Page<ComicCollect> findByUserId(Integer currentPage,Long userId){
+        Pageable pageable = PageRequest.of(currentPage,10);
+        return comicCollectImpl.findByUserId(userId,pageable);
     }
 }

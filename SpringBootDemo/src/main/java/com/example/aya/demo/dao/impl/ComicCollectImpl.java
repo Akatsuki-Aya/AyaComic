@@ -1,6 +1,8 @@
 package com.example.aya.demo.dao.impl;
 
 import com.example.aya.demo.dao.ComicCollect;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -15,6 +17,8 @@ public interface ComicCollectImpl extends JpaRepository<ComicCollect, Long> {
     Optional<ComicCollect> findById(Long id);
 
     ComicCollect findByComicIdAndUserId(Long comicId, Long userId);
+
+    Page<ComicCollect> findByUserId(Long userId, Pageable pageable);
 
     @Override
     void deleteById(Long id);

@@ -41,7 +41,7 @@ public class ComicServiceImpl implements ComicService {
 
     @Override
     public Page<Comic> findByCondition(Integer page, Comic comic) {
-        Pageable pageable = PageRequest.of(page, 1);
+        Pageable pageable = PageRequest.of(page, 2);
         return comicImpl.findAll((root, criteriaQuery, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<Predicate>();
             if(comic.getId()!=null){

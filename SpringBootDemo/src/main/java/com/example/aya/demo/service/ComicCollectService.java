@@ -1,6 +1,7 @@
 package com.example.aya.demo.service;
 
 import com.example.aya.demo.dao.ComicCollect;
+import org.springframework.data.domain.Page;
 
 /**
  * @author Aya
@@ -8,5 +9,6 @@ import com.example.aya.demo.dao.ComicCollect;
 public interface ComicCollectService {
     ComicCollect saveComicCollect(ComicCollect comicCollect);
     ComicCollect findComicCollectByUserIdAndComicId(Long userId,Long comicId);
+    Page<ComicCollect> findByUserId(Integer currentPage, Long userId);
     void  deleteComicCollectById(Long id);
 }
