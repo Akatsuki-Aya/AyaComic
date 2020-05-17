@@ -47,7 +47,7 @@ public class ComicController {
         if (!checkIsLogin()){
             return "redirect:/user/toLogin";
         }
-        comicId = 2L;
+        //comicId = 2L;
         HttpSession session = request.getSession();
         Long userId = (Long)session.getAttribute("userId");
         Comic comic = comicService.findComicById(comicId);
