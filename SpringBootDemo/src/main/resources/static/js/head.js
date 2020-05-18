@@ -11,7 +11,7 @@ document.writeln("          <a class=\'navbar-brand\' href=\'#\'>AYAComic</a>");
 document.writeln("        </div>");
 document.writeln("        <div id=\'navbar\' class=\'navbar-collapse collapse\'>");
 document.writeln("          <ul class=\'nav navbar-nav\'>");
-document.writeln("            <li><a href=\'#\'>首页</a></li>");
+document.writeln("            <li><a href=\'http://localhost/comic/toComicMain\'>首页</a></li>");
 document.writeln("            <li><a href=\'http://localhost/comic/toClassfiy\'>分类</a></li>");
 document.writeln("            <li><a href=\'#\'>排行榜</a></li>");
 document.writeln("            ");

@@ -1,6 +1,8 @@
 package com.example.aya.demo.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.example.aya.demo.common.GlobalConstants;
 import com.example.aya.demo.dao.*;
 import com.example.aya.demo.service.*;
 import com.google.gson.JsonObject;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -92,6 +95,39 @@ public class ComicController {
         model.addAttribute("page",comicPage);
         model.addAttribute("currentPage",pageNumber);
         return "/comicMainPage/classify";
+    }
+
+    @RequestMapping("/toComicMain")
+    public String toComicMain(Model model) {
+        if (!checkIsLogin()){
+            return "redirect:/user/toLogin";
+        }
+        List<Long> recomendComicId = JSON.parseArray(GlobalConstants.RECOMMEND_COMIC,Long.class);
+        List<Long> carouselRecomendComicId = JSON.parseArray(GlobalConstants.CAROUSEL_RECOMMEND_COMIC,Long.class);
+        List<Comic> recomendComic = new ArrayList<>();
+        List<Comic> carouselRecomendComic = new ArrayList<>();
+        List<Comic> rankComic = new ArrayList<>();
+        for (Long id : recomendComicId){
+            Comic comic = new Comic();
+            comic = comicService.findComicById(id);
+            recomendComic.add(comic);
+        }
+        for (Long id : carouselRecomendComicId){
+            Comic comic = new Comic();
+            comic = comicService.findComicById(id);
+            carouselRecomendComic.add(comic);
+        }
+        List<Long> comicRankId = comicCollectService.getComicRank();
+        for (Long id : comicRankId){
+            Comic comic = new Comic();
+            comic = comicService.findComicById(id);
+            rankComic.add(comic);
+        }
+        model.addAttribute("comicList",recomendComic);
+        model.addAttribute("carouselComicList",carouselRecomendComic);
+        model.addAttribute("rankComicList",rankComic);
+        this.getAllClassifyAddressProgress(model);
+        return "/comicMainPage/comicMain";
     }
 
     @RequestMapping("/addComicCollect")

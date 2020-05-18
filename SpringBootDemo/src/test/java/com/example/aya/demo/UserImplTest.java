@@ -4,6 +4,7 @@ package com.example.aya.demo;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.example.aya.demo.common.GlobalConstants;
 import com.example.aya.demo.dao.*;
 import com.example.aya.demo.dao.impl.*;
 import com.example.aya.demo.service.ComicService;
@@ -44,14 +45,10 @@ public class UserImplTest {
     private ClassfiyImpl classfiyImpl;
     @Test
     public void test() throws Exception{
-        List<Classfiy> classfiyList = classfiyImpl.findAll();
-        String s = JSON.toJSONString(classfiyList);
-        System.out.println(s);
-        JSONArray objects = JSON.parseArray(s);
-        //objects.getJSONObject("1");
 
-        System.out.println(objects.toJSONString());
-
+        Page<ComicCollect> page = this.comicCollect.getComicCollect(PageRequest.of(0, 10));
+        List<ComicCollect> content = page.getContent();
+        System.out.println(content );
 
 
         /*userImpl.save(new User("aa1", "aa@126.com", "aa", "aa123456",formattedDate));

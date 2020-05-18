@@ -9,6 +9,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Aya
  */
@@ -33,5 +36,16 @@ public class ComicCollectServiceImpl implements ComicCollectService {
     public Page<ComicCollect> findByUserId(Integer currentPage,Long userId){
         Pageable pageable = PageRequest.of(currentPage,10);
         return comicCollectImpl.findByUserId(userId,pageable);
+    }
+    public List<Long> getComicRank(){
+        Page<ComicCollect> comicCollect = comicCollectImpl.getComicCollect(PageRequest.of(0, 10));
+        List<ComicCollect> content = comicCollect.getContent();
+        List<Long> comicId = new ArrayList<>();
+        for (ComicCollect collect : content) {
+            if(collect.getComicId()!=null){
+                comicId.add(collect.getComicId());
+            }
+        }
+        return comicId;
     }
 }

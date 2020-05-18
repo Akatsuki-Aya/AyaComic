@@ -14,6 +14,8 @@ public class GlobalConstants {
     public final static String SECRET_KEY ="Ez1pQMjB4_8FPZelcTDSlTXlAL4PiwVCMpu9so5P";
     public final static String BUCKET_NAME ="ayacomic";
     public final static String DOMAIN = "http://q9zpxt4cr.bkt.clouddn.com/";
+    public final static String RECOMMEND_COMIC = "[1,2,3,4]";
+    public final static String CAROUSEL_RECOMMEND_COMIC="[1,2,3]";
 
 
 }
