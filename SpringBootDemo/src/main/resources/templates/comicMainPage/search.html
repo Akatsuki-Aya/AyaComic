@@ -137,6 +137,7 @@
                 <input type="hidden" id="pageSize" th:value="${1}">
                 <input type="hidden" id="totalPage" th:value="${page.totalPages}">
                 <input type="hidden" id="totalRow" th:value="${page.totalPages}">
+                <input type="hidden" id="searchInfo" th:value="${searchInfo}">
                 <div id="page1"></div>
             </div>
         </div>
@@ -193,7 +194,7 @@
                 progressId=$("#"+id).attr("value");
             }
             //console.log("classify?classfiyId=" + classId + "&addressId=" + addressId + "&progressId" + progressId);
-            window.location.href = "toClassfiy?classfiyId=" + classId + "&addressId=" + addressId + "&progressId=" + progressId;
+            window.location.href = "toSearch?classfiyId=" + classId + "&addressId=" + addressId + "&progressId=" + progressId+"&searchInfo="+$('#searchInfo').val();
         }
         function toComicShow(value){
             var comicId= $(value).attr("value");
@@ -201,7 +202,7 @@
         }
         $("#page1").bPage({
             //页面跳转的目标位置
-            url : 'toClassfiy',
+            url : 'toSearch',
             //分页数据设置
             totalPage : $('#totalPage').val(),
             totalRow : $('#totalRow').val(),
@@ -212,7 +213,8 @@
                 return {
                     classfiyId:$("#selectedClassId").attr("value"),
                     addressId:$("#selectedAddressId").attr("value"),
-                    progressId:$("#selectedProgressId").attr("value")
+                    progressId:$("#selectedProgressId").attr("value"),
+                    searchInfo:$('#searchInfo').val()
                     //userName : 'zhangsan',
                     //age : 42
                 };

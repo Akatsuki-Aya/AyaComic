@@ -96,6 +96,37 @@ public class ComicController {
         model.addAttribute("currentPage",pageNumber);
         return "/comicMainPage/classify";
     }
+    @RequestMapping("/toSearch")
+    public  String toSearch(Model model,String searchInfo,
+    @RequestParam(value = "classfiyId",defaultValue = "0") Long classfiyId,
+    @RequestParam(value = "addressId",defaultValue = "0") Long addressId,
+    @RequestParam(value = "progressId",defaultValue = "0") Long progressId,
+    @RequestParam(value = "pageNumber",defaultValue = "0") Integer pageNumber){
+        if (!checkIsLogin()){
+            return "redirect:/user/toLogin";
+        }
+        this.getAllClassifyAddressProgress(model);
+        this.checkSelectedTagAndAdd(model,classfiyId,addressId,progressId);
+        Comic comic = new Comic();
+        if(searchInfo != null && !"".equals(searchInfo)){
+            comic.setTitle(searchInfo);
+        }
+        comic.setClassfiy(Long.toString(classfiyId));
+        comic.setAddress(Long.toString(addressId));
+        comic.setProgress(Long.toString(progressId));
+        Page<Comic> comicPage;
+        if(pageNumber > 0){
+            comicPage = comicService.findByCondition(pageNumber-1, comic);
+        }else {
+            comicPage = comicService.findByCondition(0, comic);
+        }
+        List<Comic> comicList = comicPage.getContent();
+        model.addAttribute("searchInfo", searchInfo);
+        model.addAttribute("comicList",comicList);
+        model.addAttribute("page",comicPage);
+        model.addAttribute("currentPage",pageNumber);
+        return "/comicMainPage/search";
+    }
 
     @RequestMapping("/toComicMain")
     public String toComicMain(Model model) {

@@ -415,3 +415,7 @@
 		return this;
 	};
 }(window.jQuery);
+
+function toalert() {
+	alert("111");
+}

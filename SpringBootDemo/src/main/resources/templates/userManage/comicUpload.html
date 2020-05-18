@@ -397,6 +397,7 @@
             dataType:"json",   // 返回浏览器的数据类型，指定是json格式，前端这里才可以解析json数据
             success:function(data){
                 alert("上传成功");
+                window.location.href="/toUploadManage";
             },
             error:function() {
                 alert("error");
