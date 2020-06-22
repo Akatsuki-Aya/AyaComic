@@ -37,6 +37,7 @@ public class QiNiuUtil {
             //解析上传成功的结果
             DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
             fileUrl.append(putRet.key);
+            fileUrl.append(GlobalConstants.IMG_STYLE);
             System.out.println(putRet.key);
             System.out.println(putRet.hash);
         } catch (QiniuException ex) {

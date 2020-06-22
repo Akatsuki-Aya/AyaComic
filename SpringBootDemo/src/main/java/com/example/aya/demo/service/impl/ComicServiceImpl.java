@@ -62,4 +62,9 @@ public class ComicServiceImpl implements ComicService {
             return criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
         },pageable);
     }
+    @Override
+    public void deleteComicById(Long id){
+        comicImpl.deleteById(id);
+        return;
+    }
 }

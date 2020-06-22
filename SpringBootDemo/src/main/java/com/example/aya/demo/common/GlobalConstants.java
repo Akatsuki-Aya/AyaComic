@@ -12,10 +12,11 @@ public class GlobalConstants {
     public final static int PEOPLE_SEX_FEMALE=2;
     public final static String ACCESS_KEY ="uOPgVuZFZwAzSh0IdKwu-w-_me1BX0ISU0dRIbvT";
     public final static String SECRET_KEY ="Ez1pQMjB4_8FPZelcTDSlTXlAL4PiwVCMpu9so5P";
-    public final static String BUCKET_NAME ="ayacomic";
-    public final static String DOMAIN = "http://q9zpxt4cr.bkt.clouddn.com/";
-    public final static String RECOMMEND_COMIC = "[1,2,3,4]";
-    public final static String CAROUSEL_RECOMMEND_COMIC="[1,2,3]";
+    public final static String BUCKET_NAME ="ayacomic3";
+    public final static String DOMAIN = "http://qbn5lwo9d.bkt.clouddn.com/";
+    public final static String IMG_STYLE="?imageView2/0/q/100";
+    public final static String RECOMMEND_COMIC = "[1,2,8,4]";
+    public final static String CAROUSEL_RECOMMEND_COMIC="[1,2,8]";
 
 
 }

@@ -248,17 +248,16 @@
     }
     $(".comic-num").bind('keypress',function(event){
         if(event.keyCode == 13)
-        {  
+        {
             var text = $(".comic-num").val();
             text =$.trim(text);
             if( text==""){
                 return;
             }
-            //<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=".show-comic" style="width: 200px;">开始阅读</button>
             var addItem = $(".add-item");
             var newItem= $("<li></li>").text( text);
             $(".comic-num").val("");
-            
+
             newItem.addClass("comic-num-item ");
             newItem.attr("modalId","upload-"+i.toString());
             newItem.attr("id","upload-"+i.toString());
@@ -273,7 +272,7 @@
             initFileInput(uploadImgIdName);
             addMouseEvent();
             i++;
-        }  
+        }
     });
     
 
@@ -282,7 +281,6 @@
         $(".comic-num-item").off('mouseenter');
         $(".comic-num-item").off('mouseleave');
         $(".comic-num-item").mouseenter(function(e){
-            //<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             var oldText = $(this).text()+" ";
             $(this).text("");
             var oldItem= $("<span></span>").text(oldText);
@@ -303,7 +301,6 @@
                 $(this).parent().remove();
             });
             $(this).append(oldItem,newItem);
-            
         });
         $(".comic-num-item").mouseleave(function(e){
             var oldText = $(".Item-move-on").text();
@@ -311,8 +308,8 @@
             oldText = $.trim(oldText);
             $(this).text(oldText);
         });
-        
-        
+
+
     }
 
         //初始化fileinput
@@ -325,11 +322,6 @@
             language: 'zh', //设置语言
             dropZoneTitle: '可以将图片拖放到这里 …支持多文件上传',
             uploadUrl: "upFile", //上传的地址
-
-            /*uploadExtraData: function(previewId, index) {   //该插件可以向您的服务器方法发送附加数据。这可以通过uploadExtraData在键值对中设置为关联数组对象来完成。所以如果你有设置uploadExtraData={id:'kv-1'}，在PHP中你可以读取这些数据$_POST['id']
-                // var id = $('#id').val();
-                // return {seriesId: id};
-            },*/
             allowedFileExtensions: ['jpg','png'],//接收的文件后缀
             uploadAsync: false, //默认异步上传
             showUpload: true, //是否显示上传按钮
@@ -371,7 +363,7 @@
         });
     }
 
-    
+
     function  save() {
         var data = $("form").serialize();
         var liList = $(".comic-num-list").children();
@@ -384,7 +376,6 @@
                 var list ={name:text,urls:urls,id:id};
                 comicList.push(list);
             }
-
         }
         var comicJson = JSON.stringify(comicList);
         data=data+"&comicJson="+comicJson;
@@ -397,7 +388,7 @@
             dataType:"json",   // 返回浏览器的数据类型，指定是json格式，前端这里才可以解析json数据
             success:function(data){
                 alert("上传成功");
-                window.location.href="/toUploadManage";
+                window.location.href="/upload/toUploadManage";
             },
             error:function() {
                 alert("error");

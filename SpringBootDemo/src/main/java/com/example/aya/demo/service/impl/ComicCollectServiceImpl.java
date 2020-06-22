@@ -37,6 +37,7 @@ public class ComicCollectServiceImpl implements ComicCollectService {
         Pageable pageable = PageRequest.of(currentPage,10);
         return comicCollectImpl.findByUserId(userId,pageable);
     }
+    @Override
     public List<Long> getComicRank(){
         Page<ComicCollect> comicCollect = comicCollectImpl.getComicCollect(PageRequest.of(0, 10));
         List<ComicCollect> content = comicCollect.getContent();
@@ -48,4 +49,9 @@ public class ComicCollectServiceImpl implements ComicCollectService {
         }
         return comicId;
     }
+    @Override
+    public void deleteComicCollectByComicId(Long comicId){
+        comicCollectImpl.deleteByComicId(comicId);
+    }
+
 }

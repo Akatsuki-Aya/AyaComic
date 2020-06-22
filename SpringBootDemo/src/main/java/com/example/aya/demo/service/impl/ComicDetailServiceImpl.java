@@ -32,4 +32,9 @@ public class ComicDetailServiceImpl implements ComicDetailService {
         comicDetailImpl.deleteById(id);
         return;
     }
+    @Override
+    public void deleteComicDetailByComicId(Comic comicId){
+        comicDetailImpl.deleteByComicId(comicId);
+        return;
+    }
 }

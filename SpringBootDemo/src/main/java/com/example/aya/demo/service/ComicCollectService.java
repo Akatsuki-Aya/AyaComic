@@ -14,4 +14,5 @@ public interface ComicCollectService {
     Page<ComicCollect> findByUserId(Integer currentPage, Long userId);
     void  deleteComicCollectById(Long id);
     List<Long> getComicRank();
+    void deleteComicCollectByComicId(Long comicId);
 }

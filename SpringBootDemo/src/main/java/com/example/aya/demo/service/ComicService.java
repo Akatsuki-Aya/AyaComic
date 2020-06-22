@@ -17,4 +17,5 @@ public interface ComicService {
     Comic findComicById(Long id);
     Page<Comic> findAll(Pageable pageable);
     Page<Comic> findByCondition(Integer page, Comic comic);
+    void deleteComicById(Long id);
 }

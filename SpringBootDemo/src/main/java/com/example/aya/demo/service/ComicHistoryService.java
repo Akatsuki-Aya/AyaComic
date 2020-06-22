@@ -11,5 +11,6 @@ public interface ComicHistoryService {
     ComicHistory saveComicHistory(ComicHistory comicHistory);
     void  deleteComicHistoryById(Long id);
     Page<ComicHistory> findByUserId(Long userId, Integer currentPage);
+    void deleteCOmicHistoryByComicId(Long comicId);
 
 }

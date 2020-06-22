@@ -25,8 +25,7 @@ public class UserServiceImpl implements UserService {
         //验证表单是否有空值
         if (StringUtils.isBlank(userName)||StringUtils.isBlank(password)||
             StringUtils.isBlank(realName)||StringUtils.isBlank(idCard)||
-                StringUtils.isBlank(phone)||StringUtils.isBlank(email)
-        ) {
+                StringUtils.isBlank(phone)||StringUtils.isBlank(email)) {
             model.addAttribute("errorMsg","值为空");
             return null;
         }

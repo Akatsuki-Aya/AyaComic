@@ -12,4 +12,5 @@ import java.util.List;
 public interface UpComicService {
     UpComic saveUpComicService(UpComic upComic);
     Page<UpComic> findUpComicByUserId(Long userId, Pageable pageable);
+    void deleteUpComic(Long comicId,Long userId);
 }

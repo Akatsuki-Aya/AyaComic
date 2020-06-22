@@ -25,4 +25,9 @@ public class UpComicServiceImpl implements UpComicService {
     public Page<UpComic> findUpComicByUserId(Long userId, Pageable pageable){
         return upComicImpl.findByUserId(userId,pageable);
     }
+
+    @Override
+    public void deleteUpComic(Long comicId, Long userId){
+        upComicImpl.deleteByComicIdAndUserId(comicId,userId);
+    }
 }

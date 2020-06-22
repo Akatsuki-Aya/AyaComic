@@ -196,6 +196,36 @@ public class UploadController {
         result.put("msg","修改成功");
         return result.toJSONString();
     }
+    @ResponseBody
+    @RequestMapping("/deleteUpComic")
+    public String deleteUpComic(Long comicId){
+        HttpSession session = request.getSession();
+        Long userId = (Long)session.getAttribute("userId");
+        if (userId!=null){
+        }else {
+            JSONObject result = new JSONObject();
+            result.put("status","error");
+            result.put("msg","无法获取用户id");
+            return result.toJSONString();
+        }
+        if (comicId!=null){
+        }else {
+            JSONObject result = new JSONObject();
+            result.put("status","error");
+            result.put("msg","无法获取漫画id");
+            return result.toJSONString();
+        }
+        upComicService.deleteUpComic(comicId,userId);
+        Comic comic = comicService.findComicById(comicId);
+        comicDetailService.deleteComicDetailByComicId(comic);
+        comicHistoryService.deleteCOmicHistoryByComicId(comicId);
+        comicCollectService.deleteComicCollectByComicId(comicId);
+        comicService.deleteComicById(comicId);
+        JSONObject result = new JSONObject();
+        result.put("status","success");
+        result.put("msg","success");
+        return result.toJSONString();
+    }
 
     @ResponseBody
     @RequestMapping(value = "/upFile",method= RequestMethod.POST)

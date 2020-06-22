@@ -10,4 +10,5 @@ public interface ComicDetailService {
     ComicDetail saveComicDetail(ComicDetail comicDetail);
     ComicDetail findComicDetailByIdAndComicId(Long id, Comic comicId);
     void deleteComicDetailById(Long id);
+    void deleteComicDetailByComicId(Comic comicId);
 }

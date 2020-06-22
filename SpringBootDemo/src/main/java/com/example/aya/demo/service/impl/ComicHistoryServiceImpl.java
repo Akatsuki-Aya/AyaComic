@@ -37,5 +37,10 @@ public class ComicHistoryServiceImpl implements ComicHistoryService {
         Pageable pageable = PageRequest.of(currentPage,10);
         return comicHistoryImpl.findByUserId(userId,pageable);
     }
+    @Override
+    public void deleteCOmicHistoryByComicId(Long comicId){
+        comicHistoryImpl.deleteByComicId(comicId);
+        return;
+    }
 
 }

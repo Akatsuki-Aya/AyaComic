@@ -93,7 +93,7 @@
                             <h4 th:text="${comic.title}" th:attr="title=${comic.title}" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
                                 漫画1
                             </h4>
-                            <p><a onclick="toUpload(this)" class="btn btn-primary" role="button">编辑</a> <a href="#" class="btn btn-default" role="button">删除</a></p>
+                            <p><a onclick="toUpload(this)" class="btn btn-primary" role="button">编辑</a> <a onclick="toDelete(this);" class="btn btn-default" role="button">删除</a></p>
                         </div>
                     </div>
 
@@ -136,6 +136,28 @@
             //mydata = value;
             var comicId= $(value).parent().parent().attr("comicId");
             window.location.href="toUploadImgFile?comicId="+comicId;
+        }
+        function toDelete(value){
+            var comicId= $(value).parent().parent().attr("comicId");
+            $.ajax({
+                type:"POST",
+                url:"deleteUpComic",
+                data:{comicId:comicId},
+                async:true,   // 异步，默认开启，也就是$.ajax后面的代码是不是跟$.ajx里面的代码一起执行
+                dataType:"json",   // 返回浏览器的数据类型，指定是json格式，前端这里才可以解析json数据
+                success:function(data){
+                    if(data.msg="success"){
+                        alert("删除成功");
+                        window.location.href="toUploadManage";
+                    }else{
+                        alert("删除失败");
+                        window.location.href="toUploadManage";
+                    }
+                },
+                error:function() {
+                    alert("error");
+                }
+            });
         }
         $("#page1").bPage({
             //页面跳转的目标位置
